@@ -1,0 +1,24 @@
+{
+  "name": "Bromo",
+  "description": "Bromo, Mount 39",
+  "main": "index.js",
+  "authors": [
+    "Mount 39"
+  ],
+  "license": "BSD-2-Clause",
+  "keywords": [
+    "Bromo"
+  ],
+  "homepage": "https://github.com/Mount-39/Bromo",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.4"
+  }
+}
