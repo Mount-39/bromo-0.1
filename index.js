@@ -30,15 +30,28 @@ router.get('/bundle.min.js', function(req, res){
 router.get('/bundle.js', function(req, res){
     res.sendFile(folder + 'bundle.js');
 });
+// bundle.min.css
+router.get('/bundle.min.css', function(req, res){
+    res.sendFile(folder + 'bundle.min.css');
+});
+// bundle.css
+router.get('/bundle.css', function(req, res){
+    res.sendFile(folder + 'bundle.css');
+});
 
 // applying routes to app
 app.use('/', router);
 
 // configuring socket.io
-io.on('connection', function (socket) {
+io.on('connect', function (socket) {
     console.log('User connected to Bromo :)');
+
     socket.on('disconnect', function () {
         console.log('User disconnected from Bromo :(');
+    });
+
+    socket.on('message', function (message) {
+        io.emit('message', message);
     });
 });
 

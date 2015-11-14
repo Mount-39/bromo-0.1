@@ -9215,9 +9215,14 @@ return jQuery;
     $(document).ready(function () {
         $('form').submit(function(){
             var m = $('#m');
-            socket.emit('chat message', m.val());
+            // emit it's like triggering some event
+            socket.emit('message', m.val());
+
             m.val('');
             return false;
+        });
+        socket.on('message', function (message) {
+            $('#messages').append($('<li>').text(message));
         });
     });
 })();
