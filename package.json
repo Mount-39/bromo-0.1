@@ -19,8 +19,9 @@
     "url": "https://github.com/Mount-39/Bromo/issues"
   },
   "devDependencies": {
-    "gulp": "~3.9.0",
     "bower": "~1.6.5",
-    "bower-update": "~0.2.0"
+    "bower-update": "~0.2.0",
+    "express": "^4.13.3",
+    "gulp": "~3.9.0"
   }
 }
