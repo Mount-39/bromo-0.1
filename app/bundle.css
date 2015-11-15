@@ -1,4 +1,129 @@
 * {
+	margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#page {
+	font-size: 20px;
+	padding: 0;
+	margin: 0;
+	height: 100vh;
+	display: flex;
+	background-color: #F6F6F6;
+}
+
+header {
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 15px;
+	margin: 0;
+	height: 45px;
+	font-size: 24px;
+	color: #F6F6F6;
+}
+header.menu {
+	background-color: #6A5188;
+}
+header.title {
+	background-color: #765A98;
+}
+
+#sidebar {
+	/*background-color: #C5BAD1;*/
+	margin: 0;
+	width: 280px;
+	display: flex;
+	height: 100vh;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+}
+
+#people {
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	-o-flex: 1;
+	flex: 1;
+}
+
+#container {
+	background: url('background/bg1.jpg') no-repeat; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	margin: 0;
+	display: flex;
+	height: 100vh;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;	
+
+	/* For full width */
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	-o-flex: 1;
+	flex: 1;
+}
+
+#chat {	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	-o-flex: 1;
+	flex: 1;
+	width: 100%;
+	background-color: rgba(0,0,0,0.75);
+}
+
+#form {
+	display: flex;
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-ms-flex-direction: row;
+	-o-flex-direction: row;
+	flex-direction: row;
+	height: 40px;
+	width: 100%;
+}
+#form input {
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	height: 100%;
+	border: 0;
+	border-left: solid 1px #B7B7B7;
+	border-right: solid 1px #B7B7B7;
+	width: 80%;
+	outline: 0;
+}
+#form button {
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	flex: 1;
+	background-color: #F6F6F6;
+	outline: 0;
+	height: 100%;
+	border: 0;
+}
+
+
+
+/** {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -42,4 +167,4 @@ form button {
 
 #messages li:nth-child(odd) {
     background: #eee;
-}
+}*/

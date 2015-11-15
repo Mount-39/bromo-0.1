@@ -2,15 +2,33 @@
 <html>
 <head>
     <title>Bromo</title>
-    <link rel="stylesheet" href="/bundle.css"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="viewport" http-equiv="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <link rel="stylesheet" href="bundle.css"/>
 </head>
 <body>
-    <ul id="messages"></ul>
+	<div id="page">
+		<aside id="sidebar">
+			<header class="menu">Bromo</header>
+			<div id="people">
+				
+			</div>
+		</aside>
+		<div id="container">
+			<header class="title">Main chat</header>
+			<div id="chat"></div>
+			<div id="form">
+				<input type="message" autocomplete="off">
+				<button>Send</button>
+			</div>
+		</div>
+	</div>
+    <!-- <ul id="messages"></ul>
     <form action="">
         <input id="m" autocomplete="off"/>
         <button>Send</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/bundle.js"></script>
+    </form> -->
+    <script src="socket.io/socket.io.js"></script>
+    <script src="bundle.js"></script>
 </body>
 </html>

@@ -38,6 +38,9 @@ router.get('/bundle.min.css', function(req, res){
 router.get('/bundle.css', function(req, res){
     res.sendFile(folder + 'bundle.css');
 });
+router.get('/background/bg1.jpg', function(req, res){
+    res.sendFile(folder + 'background/bg1.jpg');
+});
 
 // applying routes to app
 app.use('/', router);
