@@ -12,7 +12,11 @@
 	margin: 0;
 	height: 100vh;
 	display: flex;
-	background-color: #F6F6F6;
+	background: url('background/bg1.jpg') no-repeat; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 header {
@@ -31,12 +35,12 @@ header {
 }
 header.menu {
 	/*background-color: #6A5188;*/
-	background-color: #2D384A;
+	background-color: rgba(45,56,74,0.80);
 }
 header.title {
 	/*background-color: #765A98;*/
 	/*background-color: #2D384A;*/
-	background-color: rgba(45, 56, 74, 0.64);
+	background-color: rgba(45,56,74,0.70);
 }
 
 #sidebar {
@@ -45,6 +49,7 @@ header.title {
 	width: 280px;
 	display: flex;
 	height: 100vh;
+	background-color: rgba(246,246,246,0.70);
 	-webkit-flex-direction: column;
 	-moz-flex-direction: column;
 	-ms-flex-direction: column;
@@ -61,11 +66,6 @@ header.title {
 }
 
 #container {
-	background: url('background/bg1.jpg') no-repeat; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
 	margin: 0;
 	display: flex;
 	height: 100vh;
@@ -90,7 +90,7 @@ header.title {
 	flex: 1;
 	width: 80%;
 	margin: 10px auto 0;
-	background-color: rgba(246,246,246,0.88);
+	background-color: rgba(246,246,246,0.70);
 }
 
 #form {

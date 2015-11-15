@@ -6,9 +6,10 @@ var gulp = require('gulp'),
     gulpRename = require('gulp-rename');
 
 gulp.task('default', function () {
-    gulp.start(['bundle', 'css']);
+    gulp.start(['bundle', 'cssBromo', 'cssAtom']);
     gulp.watch('core/*.js', ['bundle']);
-    gulp.watch('core/*.css', ['css']);
+    gulp.watch('core/bromo/*.css', ['cssBromo']);
+    gulp.watch('core/atom/*.css', ['cssAtom']);
 });
 
 gulp.task('bundle', function () {
@@ -20,11 +21,20 @@ gulp.task('bundle', function () {
         .pipe(gulp.dest('app/'));
 });
 
-gulp.task('css', function () {
-    gulp.src('core/*.css')
+gulp.task('cssBromo', function () {
+    gulp.src('core/bromo/*.css')
         .pipe(gulpConcat('bundle.css'))
         .pipe(gulp.dest('app/'))
         .pipe(gulpMinify())
         .pipe(gulpRename('bundle.min.css'))
+        .pipe(gulp.dest('app/'));
+});
+
+gulp.task('cssAtom', function () {
+    gulp.src('core/atom/*.css')
+        .pipe(gulpConcat('atom.css'))
         .pipe(gulp.dest('app/'))
+        .pipe(gulpMinify())
+        .pipe(gulpRename('atom.min.css'))
+        .pipe(gulp.dest('app/'));
 });
