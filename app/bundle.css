@@ -12,7 +12,7 @@
 	margin: 0;
 	height: 100vh;
 	display: flex;
-	background: url('background/bg1.jpg') no-repeat; 
+	background: url('background/bg1.jpg') no-repeat bottom left; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -35,12 +35,12 @@ header {
 }
 header.menu {
 	/*background-color: #6A5188;*/
-	background-color: rgba(45,56,74,0.80);
+	background-color: rgba(45,56,74,0.88);
 }
 header.title {
 	/*background-color: #765A98;*/
 	/*background-color: #2D384A;*/
-	background-color: rgba(45,56,74,0.70);
+	background-color: rgba(45,56,74,0.88);
 }
 
 #sidebar {
@@ -49,7 +49,7 @@ header.title {
 	width: 280px;
 	display: flex;
 	height: 100vh;
-	background-color: rgba(246,246,246,0.70);
+	background-color: rgba(246,246,246,0.88);
 	-webkit-flex-direction: column;
 	-moz-flex-direction: column;
 	-ms-flex-direction: column;
@@ -90,7 +90,7 @@ header.title {
 	flex: 1;
 	width: 80%;
 	margin: 10px auto 0;
-	background-color: rgba(246,246,246,0.70);
+	background-color: rgba(246,246,246,0.88);
 }
 
 #form {
@@ -126,7 +126,12 @@ header.title {
 	border: 0;
 }
 
-
+@media screen and (max-width: 720px) {
+	#sidebar {
+		display: none;
+		font-size: 90px;
+	}	
+}
 
 /** {
     margin: 0;

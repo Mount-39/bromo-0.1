@@ -62,3 +62,9 @@ io.on('connect', function (socket) {
 http.listen(port, function () {
     console.log('Bromo is running on port ' + port);
 });
+
+function setRoutes(router, routes){
+    for(route in routes){
+        router.get(route.na)
+    }
+}
