@@ -3934,7 +3934,7 @@ jQuery.extend({
 		}
 	},
 
-	// Not public - generate a queueHooks object, or return the current one
+	// Not app - generate a queueHooks object, or return the current one
 	_queueHooks: function( elem, type ) {
 		var key = type + "queueHooks";
 		return data_priv.get( elem, key ) || data_priv.access( elem, key, {
@@ -4078,7 +4078,7 @@ function safeActiveElement() {
 }
 
 /*
- * Helper functions for managing events -- not part of the public interface.
+ * Helper functions for managing events -- not part of the app interface.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
 jQuery.event = {
@@ -9211,17 +9211,21 @@ return jQuery;
 
 (function () {
     var socket = io();
-
     $(document).ready(function () {
-        console.log('sas');
         $('button').on('click', function(){
             var message = $('#message');
-            socket.emit('message', message.val())
+            // emit it's like triggering some event
+            socket.emit('message', message.val());
+            addMessage(message.val(), 'outbox');
             message.val('');
             return false;
         });
         socket.on('message', function (message) {
-            $('#chat ul').append($('<li>').addClass('inbox').text(message));
+            console.log('I get message!');
+            addMessage(message, 'indox');
         });
     });
+    function addMessage(message, className){
+        $('#chat ul').append($('<li>').addClass(className).text(message));
+    }
 })();

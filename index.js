@@ -4,10 +4,7 @@ var express = require('express'),
     router = express.Router();
     app = express(),
     http = require('http').Server(app),
-    io = require('socket.io')(http),
-    client = require('socket.io-client');
-
-console.log(client);
+    io = require('socket.io')(http);
 
 // VARIABLES
 // ==================================
@@ -25,34 +22,8 @@ router.use(function (req, res, next) {
 router.get('/', function(req, res){
     res.sendFile(folder + 'index.html');
 });
-// bundle.min.js
-router.get('/bundle.min.js', function(req, res){
-    res.sendFile(folder + 'bundle.min.js');
-});
-// bundle.js
-router.get('/bundle.js', function(req, res){
-    res.sendFile(folder + 'bundle.js');
-});
-// bundle.min.css
-router.get('/bundle.min.css', function(req, res){
-    res.sendFile(folder + 'bundle.min.css');
-});
-// bundle.css
-router.get('/bundle.css', function(req, res){
-    res.sendFile(folder + 'bundle.css');
-});
-router.get('/background/bg1.jpg', function(req, res){
-    res.sendFile(folder + 'background/bg1.jpg');
-});
-router.get('/fonts/fonts.css', function(req, res){
-    res.sendFile(folder + '/fonts/fonts.css');
-});
-router.get('/fonts/pier-regular.otf', function(req, res){
-    res.sendFile(folder + '/fonts/pier-regular.otf');
-});
-router.get('/fonts/pier-bold.otf', function(req, res){
-    res.sendFile(folder + '/fonts/pier-bold.otf');
-});
+router.use('/js', express.static(folder + '/js'));
+router.use('/style', express.static(folder + '/style'));
 
 // applying routes to app
 app.use('/', router);
@@ -60,13 +31,14 @@ app.use('/', router);
 // configuring socket.io
 io.on('connect', function (socket) {
     console.log('User connected to Bromo :)');
-    socket.broadcast.emit('message', "Let's say hello to our new member!");
+
     socket.on('disconnect', function () {
         console.log('User disconnected from Bromo :(');
     });
 
     socket.on('message', function (message) {
-        io.emit('message', message);
+        socket.broadcast.emit('message', message);
+        console.log('I sent message!')
     });
 });
 
@@ -74,9 +46,3 @@ io.on('connect', function (socket) {
 http.listen(port, function () {
     console.log('Bromo is running on port ' + port);
 });
-
-function setRoutes(router, routes){
-    for(route in routes){
-        router.get(route.na)
-    }
-}
