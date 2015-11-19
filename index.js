@@ -22,25 +22,8 @@ router.use(function (req, res, next) {
 router.get('/', function(req, res){
     res.sendFile(folder + 'index.html');
 });
-// bundle.min.js
-router.get('/bundle.min.js', function(req, res){
-    res.sendFile(folder + 'bundle.min.js');
-});
-// bundle.js
-router.get('/bundle.js', function(req, res){
-    res.sendFile(folder + 'bundle.js');
-});
-// bundle.min.css
-router.get('/bundle.min.css', function(req, res){
-    res.sendFile(folder + 'bundle.min.css');
-});
-// bundle.css
-router.get('/bundle.css', function(req, res){
-    res.sendFile(folder + 'bundle.css');
-});
-router.get('/background/bg1.jpg', function(req, res){
-    res.sendFile(folder + 'background/bg1.jpg');
-});
+router.use('/js', express.static(folder + '/js'));
+router.use('/style', express.static(folder + '/style'));
 
 // applying routes to app
 app.use('/', router);
@@ -54,7 +37,8 @@ io.on('connect', function (socket) {
     });
 
     socket.on('message', function (message) {
-        io.emit('message', message);
+        socket.broadcast.emit('message', message);
+        console.log('I sent message!')
     });
 });
 
