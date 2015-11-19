@@ -13,18 +13,16 @@ var port = 8080,
 
 // SETTING UP ROUTES
 // ==================================
-// setting up router event on request
-router.use(function (req, res, next) {
-    console.log(req.method, req.url);
-    next();
-});
-// index.html
 router.get('/', function(req, res){
     res.sendFile(folder + 'index.html');
 });
 router.use('/js', express.static(folder + '/js'));
 router.use('/style', express.static(folder + '/style'));
-
+// setting up router callback on request
+router.use(function (req, res, next) {
+    console.log(req.method, req.url);
+    next();
+});
 // applying routes to app
 app.use('/', router);
 
