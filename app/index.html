@@ -4,6 +4,7 @@
     <title>Bromo</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="viewport" http-equiv="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="bundle.css"/>
 </head>
 <body>
@@ -18,19 +19,16 @@
 
 
 		<div id="container">
-			<!-- <header class="title"></header>
-			<div id="chat"></div>
+			<header class="title"></header>
+			<div id="chat">
+				<ul></ul>
+			</div>
 			<div id="form">
-				<input type="message" autocomplete="off">
-				<button>Send</button>
-			</div> -->
+				<input id="message" autocomplete="off">
+				<button >Send</button>
+			</div>
 		</div>
 	</div>
-    <!-- <ul id="messages"></ul>
-    <form action="">
-        <input id="m" autocomplete="off"/>
-        <button>Send</button>
-    </form> -->
     <script src="socket.io/socket.io.js"></script>
     <script src="bundle.js"></script>
 </body>

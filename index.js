@@ -4,7 +4,10 @@ var express = require('express'),
     router = express.Router();
     app = express(),
     http = require('http').Server(app),
-    io = require('socket.io')(http);
+    io = require('socket.io')(http),
+    client = require('socket.io-client');
+
+console.log(client);
 
 // VARIABLES
 // ==================================
@@ -41,6 +44,15 @@ router.get('/bundle.css', function(req, res){
 router.get('/background/bg1.jpg', function(req, res){
     res.sendFile(folder + 'background/bg1.jpg');
 });
+router.get('/fonts/fonts.css', function(req, res){
+    res.sendFile(folder + '/fonts/fonts.css');
+});
+router.get('/fonts/pier-regular.otf', function(req, res){
+    res.sendFile(folder + '/fonts/pier-regular.otf');
+});
+router.get('/fonts/pier-bold.otf', function(req, res){
+    res.sendFile(folder + '/fonts/pier-bold.otf');
+});
 
 // applying routes to app
 app.use('/', router);
@@ -48,7 +60,7 @@ app.use('/', router);
 // configuring socket.io
 io.on('connect', function (socket) {
     console.log('User connected to Bromo :)');
-
+    socket.broadcast.emit('message', "Let's say hello to our new member!");
     socket.on('disconnect', function () {
         console.log('User disconnected from Bromo :(');
     });

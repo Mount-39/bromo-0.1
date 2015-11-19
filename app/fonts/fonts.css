@@ -1,0 +1,9 @@
+@font-face {
+    font-family: pier; /* Имя шрифта */
+    src: url(pier-regular.otf); /* Путь к файлу со шрифтом */
+}
+@font-face {
+    font-family: pier; /* Имя шрифта */
+    font-weight: bold;
+    src: url(pier-bold.otf); /* Путь к файлу со шрифтом */
+}
