@@ -4,15 +4,24 @@
         $('button').on('click', function(){
             var message = $('#message');
             // emit it's like triggering some event
-            socket.emit('message', message.val());
-            addMessage(message.val(), 'outbox');
-            message.val('');
+            //socket.emit('message', message.val());
+            //addMessage(message.val(), 'outbox');
+            //message.val('');
+            console.log('main.js: clicked');
+            socket.emit('sign up', {
+                email: 'user@bromo.net',
+                password: 'password'
+            });
             return false;
         });
         socket.on('message', function (message) {
-            console.log('I get message!');
-            addMessage(message, 'indox');
+            console.log('main.js: I get message!');
+            //addMessage(message, 'indox');
         });
+        socket.on('error', function (e) {
+            console.log('main.js: oh already!');
+            console.log(e);
+        })
     });
     function addMessage(message, className){
         $('#chat ul').append($('<li>').addClass(className).text(message));
