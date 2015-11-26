@@ -5,40 +5,64 @@ var gulp = require('gulp'),
     gulpMinify = require('gulp-minify-css'),
     gulpRename = require('gulp-rename');
 
-var jsDir      = 'app/js',
-    cssDir     = 'app/style';
+var src = {
+    css: {
+        bromo: {
+            main: './design/bromo/main.css',
+            sign: './design/bromo/sign.css'
+        }
+    },
+    js: {
+        jquery: './bower_components/jquery/dist/jquery/dist/jquery.min.js',
+        main: './core/main.js'
+    }
+};
+
+var dest = {
+    css: './app/style',
+    js: './app/js'
+};
 
 gulp.task('default', function () {
-    gulp.start(['bundle', 'cssBromo', 'cssAtom']);
+    gulp.start([
+        'js',
+        'css'
+    ]);
 
-    gulp.watch('core/*.js', ['bundle']);
-    gulp.watch('design/bromo/*.css', ['cssBromo']);
-    gulp.watch('design/atom/*.css', ['cssAtom']);
+    gulp.watch(src.js.main, 'js');
+    gulp.watch([
+        src.css.bromo.main,
+        src.css.bromo.sign
+    ] , 'css');
 });
 
-gulp.task('bundle', function () {
-    gulp.src(['bower_components/jquery/dist/jquery.js', 'core/*.js'])
-        .pipe(gulpConcat('bundle.js'))
-        .pipe(gulp.dest(jsDir))
+gulp.task('js', function () {
+    gulp.src([
+        src.js.jquery,
+        src.js.main
+    ])
+        .pipe(gulpConcat('bundle.min.js'))
         .pipe(gulpUglify())
-        .pipe(gulpRename('bundle.min.js'))
-        .pipe(gulp.dest(jsDir));
+        .pipe(gulp.dest(dest.js));
 });
 
-gulp.task('cssBromo', function () {
-    gulp.src('design/bromo/*.css')
-        .pipe(gulpConcat('bundle.css'))
-        .pipe(gulp.dest(cssDir))
-        .pipe(gulpMinify())
-        .pipe(gulpRename('bundle.min.css'))
-        .pipe(gulp.dest(cssDir));
+gulp.task('css', function () {
+    gulp.start([
+        'css-main',
+        'css-sign'
+    ])
 });
 
-gulp.task('cssAtom', function () {
-    gulp.src('design/atom/*.css')
-        .pipe(gulpConcat('atom.css'))
-        .pipe(gulp.dest(cssDir))
+gulp.task('css-main', function () {
+    gulp.src(src.css.bromo.main)
         .pipe(gulpMinify())
-        .pipe(gulpRename('atom.min.css'))
-        .pipe(gulp.dest(cssDir));
+        .pipe(gulpRename('main.min.css'))
+        .pipe(gulp.dest(dest.css));
+});
+
+gulp.task('css-sign', function () {
+    gulp.src(src.css.bromo.sign)
+        .pipe(gulpMinify())
+        .pipe(gulpRename('sign.min.css'))
+        .pipe(gulp.dest(dest.css));
 });

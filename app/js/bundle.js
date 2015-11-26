@@ -3934,7 +3934,7 @@ jQuery.extend({
 		}
 	},
 
-	// Not public - generate a queueHooks object, or return the current one
+	// Not app - generate a queueHooks object, or return the current one
 	_queueHooks: function( elem, type ) {
 		var key = type + "queueHooks";
 		return data_priv.get( elem, key ) || data_priv.access( elem, key, {
@@ -4078,7 +4078,7 @@ function safeActiveElement() {
 }
 
 /*
- * Helper functions for managing events -- not part of the public interface.
+ * Helper functions for managing events -- not part of the app interface.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
 jQuery.event = {
@@ -9215,22 +9215,21 @@ return jQuery;
         $('button').on('click', function(){
             var message = $('#message');
             // emit it's like triggering some event
-            //socket.emit('message', message.val());
-            //addMessage(message.val(), 'outbox');
-            //message.val('');
-            console.log('main.js: clicked');
+            socket.emit('message', message.val());
+            addMessage(message.val(), 'outbox');
+            message.val('');
             socket.emit('sign up', {
-                email: 'user@bromo.net',
+                email: 'bromo@bromo.com',
                 password: 'password'
             });
             return false;
         });
         socket.on('message', function (message) {
             console.log('main.js: I get message!');
-            //addMessage(message, 'indox');
+            addMessage(message, 'indox');
         });
-        socket.on('error', function (e) {
-            console.log('main.js: oh already!');
+        socket.on('alarm', function (e) {
+            console.log('main.js: something is wrong!');
             console.log(e);
         })
     });

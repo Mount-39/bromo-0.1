@@ -42,25 +42,15 @@ io.on('connect', function (socket) {
     });
 
     socket.on('sign up', function (user) {
-        console.log('index.js: signing up');
         var newUser = User({
             email: user.email,
             password: user.password
         });
-        console.log('index.js: user is here');
         newUser.save(function (err, done) {
-            console.log('index.js: trying to save');
             if(err){
-                console.log('index.js: oh there is error');
-                console.log('index.js: ', err);
-                console.log('index.js: ', done);
-                try{
-
-                }
-                catch (e) {
-                    console.log('ee');
-                }
-                socket.emit('error', 'fuck');
+                console.log('index.js: oh there is error, while saving user');
+                console.log(err);
+                socket.emit('alarm', 'fuck');
             }
         });
 
