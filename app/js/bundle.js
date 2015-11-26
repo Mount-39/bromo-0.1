@@ -9218,7 +9218,7 @@ return jQuery;
             //socket.emit('message', message.val());
             //addMessage(message.val(), 'outbox');
             //message.val('');
-            console.log('clicked');
+            console.log('main.js: clicked');
             socket.emit('sign up', {
                 email: 'user@bromo.net',
                 password: 'password'
@@ -9226,11 +9226,11 @@ return jQuery;
             return false;
         });
         socket.on('message', function (message) {
-            console.log('I get message!');
+            console.log('main.js: I get message!');
             //addMessage(message, 'indox');
         });
         socket.on('error', function (e) {
-            console.log('oh already!');
+            console.log('main.js: oh already!');
             console.log(e);
         })
     });
