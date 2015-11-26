@@ -7,27 +7,24 @@ var express = require('express'),
     mongoose = require('mongoose'),
     User = require('./core/models/user');
 
-mongoose.connect('mongodb://localhost:27017/bromo');
-
 // VARIABLES
 // ==================================
 var port = 8080,
     folder = __dirname + '/app/';
 
+mongoose.connect('mongodb://localhost:27017/bromo');
+
 // SETTING UP ROUTES
 // ==================================
 // setting up router event on request
-router.use(function (req, res, next) {
-    console.log(req.method, req.url);
-    next();
-});
-// index.html
+//router.use(function (req, res, next) {
+//    console.log(req.method, req.url);
+//    next();
+//});
 router.get('/', function (req, res) {
     res.sendFile(folder + 'index.html');
 });
-// js/
 router.use('/js', express.static(folder + '/js'));
-// style/
 router.use('/style', express.static(folder + '/style'));
 
 // applying routes to app
@@ -48,9 +45,9 @@ io.on('connect', function (socket) {
         });
         newUser.save(function (err, done) {
             if(err){
-                console.log('index.js: oh there is error, while saving user');
-                console.log(err);
-                socket.emit('alarm', 'fuck');
+                console.log('run.js - error while saving user');
+                console.log(typeof err);
+                socket.emit('alarm', err.toString());
             }
         });
 

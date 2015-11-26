@@ -13,7 +13,7 @@ var src = {
         }
     },
     js: {
-        jquery: './bower_components/jquery/dist/jquery/dist/jquery.min.js',
+        jquery: './bower_components/jquery/dist/jquery.min.js',
         main: './core/main.js'
     }
 };
