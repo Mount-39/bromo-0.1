@@ -18,7 +18,7 @@ var userSchema = mongoose.Schema({
 userSchema.pre('save', true, function (next, done) {
     // email validation
     mongoose.models['user'].findOne({
-        username: this.username
+        email: this.email
     }, function (err, user) {
         console.log('user.js: handle saving');
         if(err){
