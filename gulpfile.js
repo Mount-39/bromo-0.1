@@ -10,9 +10,10 @@ var jsDir      = 'app/js',
 
 gulp.task('default', function () {
     gulp.start(['bundle', 'cssBromo', 'cssAtom']);
+
     gulp.watch('core/*.js', ['bundle']);
-    gulp.watch('core/bromo/*.css', ['cssBromo']);
-    gulp.watch('core/atom/*.css', ['cssAtom']);
+    gulp.watch('design/bromo/*.css', ['cssBromo']);
+    gulp.watch('design/atom/*.css', ['cssAtom']);
 });
 
 gulp.task('bundle', function () {
@@ -25,7 +26,7 @@ gulp.task('bundle', function () {
 });
 
 gulp.task('cssBromo', function () {
-    gulp.src('core/bromo/*.css')
+    gulp.src('design/bromo/*.css')
         .pipe(gulpConcat('bundle.css'))
         .pipe(gulp.dest(cssDir))
         .pipe(gulpMinify())
@@ -34,7 +35,7 @@ gulp.task('cssBromo', function () {
 });
 
 gulp.task('cssAtom', function () {
-    gulp.src('core/atom/*.css')
+    gulp.src('design/atom/*.css')
         .pipe(gulpConcat('atom.css'))
         .pipe(gulp.dest(cssDir))
         .pipe(gulpMinify())

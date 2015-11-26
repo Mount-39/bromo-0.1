@@ -10,13 +10,8 @@ body {
 	font-family: pier;
 }
 
-h1 {
-	flex: 1;
-	font-size: 1.4em;
-}
-
 #page {
-	font-size: 20px;
+	font-size: 16px;
 	padding: 0;
 	margin: 0;
 	height: 100vh;
@@ -26,6 +21,20 @@ h1 {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+}
+
+.aa {
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.aa input {
+	width: 40%;
+	height: 40px;
 }
 
 header {
@@ -39,7 +48,6 @@ header {
 	padding-left: 15px;
 	margin: 0;
 	height: 45px;
-	font-size: 24px;
 	color: #E4E4E4;
 }
 header.menu {
@@ -130,6 +138,11 @@ header.title {
 	height: 40px;
 	width: 80%;
 }
+#form input,
+#form button {
+	font-family: pier;
+	font-size: 1.2em;
+}
 #form input {
 	-webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -168,7 +181,7 @@ header.title {
 }
 
 a{
-	rgba(45,56,74,0.70);
+	color: rgba(45,56,74,0.70);
 }
 
 ::-webkit-scrollbar-thumb {
