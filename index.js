@@ -7,7 +7,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     User = require('./core/models/user');
 
-mongoose.connect('mongodb://localhost:27017/bromo');
+mongoose.connect('mongodb://localhost:27017/test');
 
 // VARIABLES
 // ==================================
