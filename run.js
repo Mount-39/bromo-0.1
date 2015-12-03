@@ -24,6 +24,9 @@ var port = 8080,
 router.get('/', function (req, res) {
     res.sendFile(folder + 'index.html');
 });
+router.get('/favicon.icon', function (req, res) {
+    res.sendFile(folder + './style/img/favicon.ico');
+});
 router.use('/js', express.static(folder + '/js'));
 router.use('/style', express.static(folder + '/style'));
 
