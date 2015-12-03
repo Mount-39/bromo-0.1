@@ -7,10 +7,6 @@
             socket.emit('message', message.val());
             addMessage(message.val(), 'outbox');
             message.val('');
-            //socket.emit('sign up', {
-            //    email: 'bromo@bromo.com',
-            //    password: 'password'
-            //});
             return false;
         });
         socket.on('message', function (message) {

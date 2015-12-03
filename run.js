@@ -3,16 +3,12 @@ var express = require('express'),
     router = express.Router(),
     app = express(),
     http = require('http').Server(app),
-    io = require('socket.io')(http),
-    mongoose = require('mongoose');
-    //User = require('./core/models/user');
+    io = require('socket.io')(http);
 
 // VARIABLES
 // ==================================
-var port = 8080,
+var port = process.env.PORT || 8080,
     folder = __dirname + '/app/';
-
-//mongoose.connect('mongodb://localhost:27017/bromo');
 
 // SETTING UP ROUTES
 // ==================================
@@ -35,30 +31,13 @@ app.use('/', router);
 
 // configuring socket.io
 io.on('connect', function (socket) {
-    console.log('User connected to Bromo :)');
 
     socket.on('disconnect', function () {
-        console.log('User disconnected from Bromo :(');
-    });
-
-    socket.on('sign up', function (user) {
-        //var newUser = User({
-        //    email: user.email,
-        //    password: user.password
-        //});
-        //newUser.save(function (err, done) {
-        //    if(err){
-        //        console.log('run.js - error while saving user');
-        //        console.log(typeof err);
-        //        socket.emit('alarm', err.toString());
-        //    }
-        //});
 
     });
 
     // client sending message
     socket.on('message', function (message) {
-        // broadcast - send message to everyone but sender
         socket.broadcast.emit('message', message);
     });
 });

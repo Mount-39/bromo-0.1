@@ -29,11 +29,11 @@ gulp.task('default', function () {
         'css'
     ]);
 
-    gulp.watch(src.js.main, 'js');
+    gulp.watch(src.js.main, ['js']);
     gulp.watch([
         src.css.bromo.main,
         src.css.bromo.sign
-    ] , 'css');
+    ] , ['css']);
 });
 
 gulp.task('js', function () {
