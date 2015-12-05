@@ -8,13 +8,13 @@ var gulp = require('gulp'),
 var src = {
     css: {
         bromo: {
-            main: './design/bromo/main.css',
-            sign: './design/bromo/sign.css'
+            main: './design/bromo/main.css'
         }
     },
     js: {
         jquery: './bower_components/jquery/dist/jquery/dist/jquery.min.js',
-        main: './core/main.js'
+        main: './core/main.js',
+        views: './core/views/*.js'
     }
 };
 
@@ -29,17 +29,20 @@ gulp.task('default', function () {
         'css'
     ]);
 
-    gulp.watch(src.js.main, 'js');
     gulp.watch([
-        src.css.bromo.main,
-        src.css.bromo.sign
-    ] , 'css');
+        src.js.main,
+        src.js.views
+    ], ['js']);
+    gulp.watch([
+        src.css.bromo.main
+    ], ['css']);
 });
 
 gulp.task('js', function () {
     gulp.src([
         src.js.jquery,
-        src.js.main
+        src.js.main,
+        src.js.views
     ])
         .pipe(gulpConcat('bundle.min.js'))
         .pipe(gulpUglify())
@@ -48,21 +51,13 @@ gulp.task('js', function () {
 
 gulp.task('css', function () {
     gulp.start([
-        'css-main',
-        'css-sign'
-    ])
+        'css-main'
+    ]);
 });
 
 gulp.task('css-main', function () {
     gulp.src(src.css.bromo.main)
         .pipe(gulpMinify())
         .pipe(gulpRename('main.min.css'))
-        .pipe(gulp.dest(dest.css));
-});
-
-gulp.task('css-sign', function () {
-    gulp.src(src.css.bromo.sign)
-        .pipe(gulpMinify())
-        .pipe(gulpRename('sign.min.css'))
         .pipe(gulp.dest(dest.css));
 });
