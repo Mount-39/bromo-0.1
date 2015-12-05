@@ -1,23 +1,45 @@
 // MODULES
+// setting up server etc.
 var express = require('express'),
-    router = express.Router(),
+    session = require('express-session'),
+    cookieParser = require('cookie-parser'),
     app = express(),
-    http = require('http').Server(app),
-    io = require('socket.io')(http);
+    router = express.Router(),
+    http = require('http').Server(app);
+
+// socket
+var io = require('socket.io')(http);
+
+// mongoDB
+var mongoose = require('mongoose'),
+    mongoStore = require('connect-mongo')(session);
 
 // VARIABLES
 // ==================================
 var port = process.env.PORT || 8080,
     folder = __dirname + '/app/';
 
+// CONNECT TO MONGO
+mongoose.connect('mongodb://mount39:mount39@ds049651.mongolab.com:49651/bromo');
+
+// SETTING SESSION
+app.use(cookieParser());
+app.use(session({
+    secret: 'mount39',
+    store: new mongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}));
+
 // SETTING UP ROUTES
 // ==================================
 // setting up router event on request
-//router.use(function (req, res, next) {
-//    console.log(req.method, req.url);
-//    next();
-//});
+router.use(function (req, res, next) {
+    console.log(req.method, req.url);
+    next();
+});
 router.get('/', function (req, res) {
+    console.log(req.session);
     res.sendFile(folder + 'index.html');
 });
 router.get('/favicon.icon', function (req, res) {
