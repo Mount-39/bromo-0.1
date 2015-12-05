@@ -49,6 +49,16 @@ gulp.task('js', function () {
         .pipe(gulp.dest(dest.js));
 });
 
+gulp.task('view', function () {
+    gulp.src([
+        src.js.jquery,
+        src.js.views
+    ])
+        .pipe(gulpConcat('view.min.js'))
+        .pipe(gulpUglify())
+        .pipe(gulp.dest(dest.js));
+});
+
 gulp.task('css', function () {
     gulp.start([
         'css-main'
