@@ -16,11 +16,12 @@ body {
 	margin: 0;
 	height: 100vh;
 	display: flex;
-	background: url('img/bg1.jpg') no-repeat; 
+	background: url('img/bg1.jpg') no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+
 }
 
 .aa {
@@ -90,7 +91,7 @@ header.title {
 	-moz-flex-direction: column;
 	-ms-flex-direction: column;
 	-o-flex-direction: column;
-	flex-direction: column;	
+	flex-direction: column;
 
 	/* For full width */
 	-webkit-flex: 1;
@@ -100,7 +101,7 @@ header.title {
 	flex: 1;
 }
 
-#chat {	
+#chat {
 	-webkit-flex: 1;
 	-moz-flex: 1;
 	-ms-flex: 1;
@@ -116,7 +117,7 @@ header.title {
 
 #chat li {
 	list-style: none;
-	border-bottom: 1px solid #121212; 
+	border-bottom: 1px solid #121212;
 	padding: 5px;
 }
 
@@ -190,4 +191,12 @@ a{
     -webkit-border-radius: 16px;
     background-color: rgba(45,56,74,0.80);
     /*background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));*/
+}
+
+.blur {
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
 }
