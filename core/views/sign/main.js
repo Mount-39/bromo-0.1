@@ -1,41 +1,38 @@
-
-var sign = function sign(){
+var sign = function sign() {
 
     var body = $('#page');
 
-//body.addClass('blur');
+    var content = $('<div/>', {
+        id: 'login-form'
+    }).appendTo(body);
 
-var content = $('<div/>', {
-    id: 'login-form'
-}).appendTo(body);
+    var fieldset = $('<fieldset/>', {}).appendTo(content);
 
-var fieldset = $('<fieldset/>', {}).appendTo(content);
+    var form = $('<form/>', {}).appendTo(fieldset);
 
-var form = $('<form/>', {}).appendTo(fieldset);
+    $('<input/>').attr({
+        type: 'email',
+        required: "true",
+        method: "get",
+        placeholder: "Email",
+        autocomplete: 'off'
+    }).appendTo(form);
 
-$('<input/>').attr({
-    type: 'email',
-    required: "true",
-    method: "get",
-    placeholder: "Email",
-    autocomplete: 'off'
-}).appendTo(form);
+    $('<input/>').attr({
+        type: 'password',
+        required: "true",
+        method: "get",
+        placeholder: "Password",
+        autocomplete: 'off'
+    }).appendTo(form);
 
-$('<input/>').attr({
-    type: 'password',
-    required: "true",
-    method: "get",
-    placeholder: "Password",
-    autocomplete: 'off'
-}).appendTo(form);
-
-$('<input/>').attr({
-    type: 'submit',
-    value: "GO"
-}).appendTo(form);
+    $('<input/>').attr({
+        type: 'submit',
+        value: "GO"
+    }).appendTo(form);
 
     return body;
 
-}
+};
 
 module.exports = sign;
