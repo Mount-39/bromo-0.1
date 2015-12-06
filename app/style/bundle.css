@@ -200,3 +200,80 @@ a{
 	-ms-filter: blur(5px);
 	filter: blur(5px);
 }
+
+fieldset {
+	border: none;
+	margin: 0;
+}
+
+input {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	margin: 0;
+	outline: none;
+	-webkit-appearance: none;
+}
+
+input[type="submit"] { cursor: pointer; }
+
+.clearfix { *zoom: 1; }
+.clearfix:before, .clearfix:after {
+	content: "";
+	display: table;
+}
+.clearfix:after { clear: both; }
+
+/* —------— LOGIN-FORM —------— */
+
+#login-form {
+	margin: 150px auto;
+	width: 300px;
+}
+
+
+#login-form fieldset {
+	background: #546364;
+	border-radius: 5px 5px 5px 5px;
+	padding: 20px;
+	position: relative;
+	/*opacity: 15;*/
+}
+
+
+#login-form input {
+	font-size: 14px;
+}
+
+#login-form input[type="email"],
+#login-form input[type="password"] {
+	border: 1px solid #dcdcdc;
+	padding: 12px 10px;
+	width: 238px;
+}
+
+#login-form input[type="email"] {
+	border-radius: 3px 3px 0 0;
+}
+
+#login-form input[type="password"] {
+	border-top: none;
+	border-radius: 0px 0px 3px 3px;
+}
+
+#login-form input[type="submit"] {
+	background: #AE7C3B;
+	border-radius: 3px;
+	color: #fff;
+	float: right;
+	font-weight: bold;
+	margin-top: 20px;
+	padding: 12px 20px;
+}
+
+#login-form input[type="submit"]:hover { background: #A67D35; }
+
+#login-form footer {
+	font-size: 12px;
+	margin-top: 16px;
+}
