@@ -3,6 +3,7 @@
 
     $(document).ready(function () {
 
+        alert('Hello!');
 
         // send the message
         $('button').on('click', function(){
@@ -10,10 +11,6 @@
             if(message){
                 sendMessage(message.val());
             }
-        });
-
-        socket.on('enter', function($page){
-            console.log($page());
         });
 
         // get the message

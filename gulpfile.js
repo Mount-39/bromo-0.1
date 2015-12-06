@@ -14,7 +14,8 @@ var src = {
     },
     js: {
         jquery: './bower_components/jquery/dist/jquery.min.js',
-        main: './core/main.js'
+        main: './core/main.js',
+        signView: './core/views/sign/main.js'
     }
 };
 
@@ -43,6 +44,17 @@ gulp.task('js', function () {
     ])
         .pipe(gulpConcat('bundle.min.js'))
         //.pipe(gulpUglify())
+        .pipe(gulp.dest(dest.js));
+});
+
+//@TODO DELETE THIS TASK
+gulp.task('temp', function () {
+    gulp.src([
+        src.js.jquery,
+        src.js.signView,
+        src.js.main
+    ])
+        .pipe(gulpConcat('bundle.min.js'))
         .pipe(gulp.dest(dest.js));
 });
 
