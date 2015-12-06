@@ -208,7 +208,6 @@ fieldset {
 
 input {
 	border: none;
-	font-family: inherit;
 	font-size: inherit;
 	margin: 0;
 	outline: none;
@@ -229,17 +228,29 @@ input[type="submit"] { cursor: pointer; }
 #login-form {
 	margin: 150px auto;
 	width: 300px;
+	color: whitesmoke;
 }
 
 
 #login-form fieldset {
-	background: #546364;
-	border-radius: 5px 5px 5px 5px;
+	background-color: rgba(51, 77, 102, 0.7);
+	border-radius: 3px 3px 3px 3px;
 	padding: 20px;
 	position: relative;
 	/*opacity: 15;*/
 }
 
+#login-form h1 {
+	text-align: center;
+	margin-bottom: 0;
+	/*opacity: 15;*/
+}
+
+#login-form p {
+	margin: 10px;
+	text-align: center;
+	font-size: 14px;
+}
 
 #login-form input {
 	font-size: 14px;
@@ -249,7 +260,7 @@ input[type="submit"] { cursor: pointer; }
 #login-form input[type="password"] {
 	border: 1px solid #dcdcdc;
 	padding: 12px 10px;
-	width: 238px;
+	width: 260px;
 }
 
 #login-form input[type="email"] {
@@ -265,13 +276,14 @@ input[type="submit"] { cursor: pointer; }
 	background: #AE7C3B;
 	border-radius: 3px;
 	color: #fff;
-	float: right;
+	/*float: right;*/
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: 10px;
 	padding: 12px 20px;
+	width: 260px;
 }
 
-#login-form input[type="submit"]:hover { background: #A67D35; }
+#login-form input[type="submit"]:hover { background: #CFA65E; }
 
 #login-form footer {
 	font-size: 12px;

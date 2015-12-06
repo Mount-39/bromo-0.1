@@ -1,5 +1,5 @@
-
-var sign = function sign(){
+/*
+var sign = function sign(){*/
 
     var body = $('#page');
 
@@ -12,6 +12,15 @@ var content = $('<div/>', {
 var fieldset = $('<fieldset/>', {}).appendTo(content);
 
 var form = $('<form/>', {}).appendTo(fieldset);
+
+$('<h1/>', {
+    text: 'Bromo'
+}).appendTo(form);
+
+$('<p/>', {
+    text: 'Chat with your friends become more easier than ever.'
+}).appendTo(form);
+
 
 $('<input/>').attr({
     type: 'email',
@@ -31,11 +40,17 @@ $('<input/>').attr({
 
 $('<input/>').attr({
     type: 'submit',
-    value: "GO"
+    value: "Sign in"
 }).appendTo(form);
 
+$('<input/>').attr({
+    type: 'submit',
+    value: "Forgot Password?"
+}).appendTo(form);
+
+/*
     return body;
 
 }
 
-module.exports = sign;
+module.exports = sign;*/
