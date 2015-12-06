@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-// creating a schema
+// creating a user schema
 var userSchema = mongoose.Schema({
     email: {
         type: String,
@@ -14,7 +14,7 @@ var userSchema = mongoose.Schema({
     username: String
 });
 
-// on save handler, async, callback
+// save handler, is async, callback
 userSchema.pre('save', true, function (next, done) {
     // email validation
     mongoose.models['user'].findOne({ email: this.email }, function (err, user) {
@@ -22,7 +22,7 @@ userSchema.pre('save', true, function (next, done) {
             return done(err);
         }
         if(user){
-            console.log('models/user.js - error while saving, existing email');
+            console.log('Error while saving user - user with this email is already exist');
             return done(new Error('User with this email is already exist!'));
         }
         done();

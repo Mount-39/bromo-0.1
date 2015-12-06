@@ -1,24 +1,44 @@
 (function () {
     var socket = io();
+
     $(document).ready(function () {
+
+        // send the message
         $('button').on('click', function(){
             var message = $('#message');
-            // emit it's like triggering some event
-            socket.emit('message', message.val());
-            addMessage(message.val(), 'outbox');
-            message.val('');
-            return false;
+            if(message){
+                sendMessage(message.val());
+            }
         });
+
+        // get the message
         socket.on('message', function (message) {
-            console.log('main.js: I get message!');
             addMessage(message, 'indox');
         });
+
+        // some error on server
         socket.on('alarm', function (e) {
-            console.log('main.js: something is wrong!');
-            console.log(e);
+            alert(e);
         })
     });
+
+    /**
+     *
+     * @param {string} message
+     * @param {string} className
+     */
     function addMessage(message, className){
-        $('#chat ul').append($('<li>').addClass(className).text(message));
+        $('ul#chat').append($('<li>').addClass(className).text(message));
     }
+
+    /**
+     *
+     * @param {string} message
+     */
+    function sendMessage(message){
+        socket.emit('message', message);
+        addMessage(message.val(), 'outbox');
+        message.val('');
+    }
+
 })();

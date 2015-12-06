@@ -2,17 +2,18 @@
 // setting up server etc.
 var express = require('express'),
     session = require('express-session'),
+    bodyParser = require('body-parser');
     cookieParser = require('cookie-parser'),
     app = express(),
     router = express.Router(),
     http = require('http').Server(app);
 
-// socket
-var io = require('socket.io')(http);
-
 // mongoDB
 var mongoose = require('mongoose'),
     mongoStore = require('connect-mongo')(session);
+
+// socket
+var io = require('socket.io')(http);
 
 // VARIABLES
 // ==================================
@@ -35,11 +36,10 @@ app.use(session({
 // ==================================
 // setting up router event on request
 router.use(function (req, res, next) {
-    console.log(req.method, req.url);
+    //console.log(req.method, req.url);
     next();
 });
 router.get('/', function (req, res) {
-    console.log(req.session);
     res.sendFile(folder + 'index.html');
 });
 router.get('/favicon.icon', function (req, res) {
@@ -54,14 +54,17 @@ app.use('/', router);
 // configuring socket.io
 io.on('connect', function (socket) {
 
-    socket.on('disconnect', function () {
+    console.log('user connected');
 
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
     });
 
-    // client sending message
+    // sending message
     socket.on('message', function (message) {
         socket.broadcast.emit('message', message);
     });
+
 });
 
 // listening port
