@@ -42,17 +42,7 @@ gulp.task('js', function () {
         src.js.main
     ])
         .pipe(gulpConcat('bundle.min.js'))
-        .pipe(gulpUglify())
-        .pipe(gulp.dest(dest.js));
-});
-
-gulp.task('view', function () {
-    gulp.src([
-        src.js.jquery,
-        src.js.views
-    ])
-        .pipe(gulpConcat('view.min.js'))
-        .pipe(gulpUglify())
+        //.pipe(gulpUglify())
         .pipe(gulp.dest(dest.js));
 });
 

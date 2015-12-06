@@ -1,3 +1,5 @@
+$ = require('/home/drukas/Projects/Bromo/bower_components/jquery/dist/jquery.js');
+
 var sign = function sign() {
 
     var body = $('#page');
@@ -31,7 +33,7 @@ var sign = function sign() {
         value: "GO"
     }).appendTo(form);
 
-    return body;
+    return body.innerHtml;
 
 };
 

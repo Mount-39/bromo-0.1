@@ -3,12 +3,17 @@
 
     $(document).ready(function () {
 
+
         // send the message
         $('button').on('click', function(){
             var message = $('#message');
             if(message){
                 sendMessage(message.val());
             }
+        });
+
+        socket.on('enter', function($page){
+            console.log($page());
         });
 
         // get the message

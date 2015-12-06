@@ -54,7 +54,9 @@ app.use('/', router);
 // configuring socket.io
 io.on('connect', function (socket) {
 
-    console.log('user connected');
+    var $sign = require('./core/views/sign/main');
+
+    socket.emit('enter', $sign);
 
     socket.on('disconnect', function () {
         console.log('user disconnected');
