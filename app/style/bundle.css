@@ -16,7 +16,7 @@ body {
 	margin: 0;
 	height: 100vh;
 	display: flex;
-	background: url('img/bg1.jpg') no-repeat;
+	background: url('img/bg1.jpg') no-repeat 50% 50%;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;

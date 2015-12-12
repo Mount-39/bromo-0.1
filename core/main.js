@@ -11,6 +11,7 @@
                 email: 'bromo@bromo.com',
                 password: 'password'
             });
+            console.log('dasd');
             return false;
         });
         socket.on('message', function (message) {
