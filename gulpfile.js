@@ -38,7 +38,7 @@ gulp.task('default', function () {
     ], ['css']);
 });
 
-gulp.task('js', function () {
+gulp.task('js1', function () {
     gulp.src([
         src.js.jquery,
         src.js.main,
