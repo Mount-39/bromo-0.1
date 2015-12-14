@@ -1,87 +1,77 @@
-//
-//var chat = function chat(){
-
-var body = $('#page');
+var chat = function () {
+    var body = $('#page');
 
 //========================
 
-var aside = $('<aside/>', {
-    id: 'sidebar'
-}).appendTo(body);
+    var aside = $('<aside/>', {
+        id: 'sidebar'
+    }).appendTo(body);
 
-var content = $('<div/>', {
-    id: 'view'
-}).appendTo(body);
+    var content = $('<div/>', {
+        id: 'view'
+    }).appendTo(body);
 
 
 //========ASIDE===========
 
-function setAside (asideEl) {
+    function setAside(asideEl) {
 
-    var header = $('<header/>', {
-        class: 'menu'
-    });
+        var header = $('<header/>', {
+            class: 'menu'
+        });
 
-    $('<h1/>', {
-        text: 'Bromo'
-    }).appendTo(header);
+        $('<h1/>', {
+            text: 'Bromo'
+        }).appendTo(header);
 
-    asideEl.append(header);
+        asideEl.append(header);
 
-    $('<div/>', {
-        id: 'people'
-    }).appendTo(asideEl);
+        $('<div/>', {
+            id: 'people'
+        }).appendTo(asideEl);
 
-    return this;
+        return this;
 
-};
-
+    }
 
 //========Content=========
 
-function setContent (contentEl) {
+    function setContent(contentEl) {
 
-    $('<header/>', {
-        class: 'title',
-        text: 'Main chat'
-    }).appendTo(contentEl);
+        $('<header/>', {
+            class: 'title',
+            text: 'Main chat'
+        }).appendTo(contentEl);
 
-    var chat = $('<div/>', {
-        id: 'chat'
-    });
+        var chat = $('<div/>', {
+            id: 'chat'
+        });
 
-    $('<ul/>', {
-    }).appendTo(chat);
+        $('<ul/>', {}).appendTo(chat);
 
-    contentEl.append(chat);
+        contentEl.append(chat);
 
-    var form = $('<div/>', {
-        id: 'form'
-    });
+        var form = $('<div/>', {
+            id: 'form'
+        });
 
-    $('<input/>').attr({
-        id:     'message',
-        type: 	'text',
-        autocomplete: 	'off'
-    }).appendTo(form);
-
-    $('<button/>',
-        {
-            text: 'Send'
-       //     click: function () { alert('AHAHAHAH'); }
+        $('<input/>').attr({
+            id: 'message',
+            type: 'text',
+            autocomplete: 'off'
         }).appendTo(form);
 
-    contentEl.append(form);
+        $('<button/>',
+            {
+                text: 'Send'
+                //     click: function () { alert('AHAHAHAH'); }
+            }).appendTo(form);
 
-    return this;
+        contentEl.append(form);
+
+        return this;
+    }
+
+    setAside(aside);
+    setContent(content);
 };
-
-
-setAside(aside);
-setContent(content);
-//
-//return body;
-//
-//}
-//
-//module.exports = chat;
