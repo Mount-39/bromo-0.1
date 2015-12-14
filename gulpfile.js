@@ -1,80 +1,83 @@
 "use strict";
 var gulp = require('gulp'),
-    gulpConcat = require('gulp-concat'),
-    gulpUglify = require('gulp-uglify'),
-    gulpMinify = require('gulp-minify-css'),
-    gulpRename = require('gulp-rename');
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    minify = require('gulp-minify-css'),
+    rename = require('gulp-rename');
 
-var src = {
+var source = {
     css: {
-        bromo: {
-            main: './design/bromo/main.css',
-            sign: './design/bromo/sign.css'
-        }
+        bundle: './core/styles/bundle.css'
     },
     js: {
-        jquery: './bower_components/jquery/dist/jquery.min.js',
-        main: './core/main.js',
-        signView: './core/views/sign/main.js'
+        view: {
+            chat: './core/frontend/views/chat.js',
+            sign: './core/frontend/views/sign.js'
+        },
+        main: './core/frontend/main.js',
+        jquery: './bower_components/jquery/dist/jquery.min.js'
     }
 };
 
-var dest = {
+var destination = {
     css: './app/style',
     js: './app/js'
 };
 
 gulp.task('default', function () {
     gulp.start([
-        'js',
+        'wcss',
+        'wjs'
+    ]);
+});
+
+// CSS
+gulp.task('css', function () {
+    gulp.src([
+        source.css.bundle
+    ])
+        .pipe(concat('style.min.css'))
+        .pipe(minify())
+        .pipe(gulp.dest(destination.css));
+});
+gulp.task('wcss', function () {
+    gulp.start([
         'css'
     ]);
 
-    gulp.watch(src.js.main, ['js']);
     gulp.watch([
-        src.css.bromo.main,
-        src.css.bromo.sign
-    ] , ['css']);
+        source.css.bundle
+    ], ['css']);
 });
+///////////////////////////////////////////
 
+// MAIN JS
 gulp.task('js', function () {
     gulp.src([
-        src.js.jquery,
-        src.js.main
+        source.js.jquery,
+        source.js.main
     ])
-        .pipe(gulpConcat('bundle.min.js'))
-        //.pipe(gulpUglify())
-        .pipe(gulp.dest(dest.js));
+        .pipe(concat("script.min.js"))
+        .pipe(uglify())
+        .pipe(gulp.dest(destination.js));
 });
-
-//@TODO DELETE THIS TASK
-gulp.task('temp', function () {
-    gulp.src([
-        src.js.jquery,
-        src.js.signView,
-        src.js.main
-    ])
-        .pipe(gulpConcat('bundle.min.js'))
-        .pipe(gulp.dest(dest.js));
-});
-
-gulp.task('css', function () {
+gulp.task("wjs", function () {
     gulp.start([
-        'css-main',
-        'css-sign'
+        'js'
+    ]);
+
+    gulp.watch([
+        source.js.main
+    ], ["js"]);
+});
+///////////////////////////////////////////
+
+gulp.task('view', function () {
+    gulp.src([
+        source.js.view.sign,
+        source.js.view.chat
     ])
-});
-
-gulp.task('css-main', function () {
-    gulp.src(src.css.bromo.main)
-        .pipe(gulpMinify())
-        .pipe(gulpRename('main.min.css'))
-        .pipe(gulp.dest(dest.css));
-});
-
-gulp.task('css-sign', function () {
-    gulp.src(src.css.bromo.sign)
-        .pipe(gulpMinify())
-        .pipe(gulpRename('sign.min.css'))
-        .pipe(gulp.dest(dest.css));
+        .pipe(concat('view.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(destination.js));
 });

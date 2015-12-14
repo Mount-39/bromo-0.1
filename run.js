@@ -24,6 +24,7 @@ var port = process.env.PORT || 8080,
 ///////////////////////////////////////////
 
 // SETTING UP COOKIES & SESSION
+app.use(parser());
 app.use(cookieParser());
 app.use(session({
     secret: 'r2d2',
@@ -35,7 +36,7 @@ app.use(session({
 
 // CONFIGURING ROUTES
 router.use(function (req, res, next) {
-    console.log(req.method, req.url);
+    //console.log(req.method, req.url);
     next();
 });
 router.get('/', function (req, res) {
@@ -43,6 +44,12 @@ router.get('/', function (req, res) {
 });
 router.use('/js', express.static(folder + '/js'));
 router.use('/style', express.static(folder + '/style'));
+router.post('/', function (req, res) {
+    console.log(req.body);
+});
+
+
+
 app.use('/', router);
 ///////////////////////////////////////////
 
