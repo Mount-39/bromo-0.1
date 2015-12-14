@@ -53,7 +53,7 @@ var sign = function () {
         });
     });
 
-    var forgot = $('<button/>', {id: "btn",}).text('Forgot Password?').appendTo(form);
+    var forgot = $('<button/>', {id: "btn"}).text('Forgot Password?').appendTo(form);
 
 //=====================================
 
