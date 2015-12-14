@@ -10,6 +10,10 @@
     "type": "git",
     "url": "https://github.com/Mount-39/Bromo.git"
   },
+  "engines": {
+  	"node": "4.2.2",
+  	"npm": "3.4.x"
+  },
   "keywords": [
     "Bromo"
   ],

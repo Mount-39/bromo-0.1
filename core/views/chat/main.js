@@ -1,3 +1,6 @@
+//
+//var chat = function chat(){
+
 var body = $('#page');
 
 //========================
@@ -76,4 +79,9 @@ function setContent (contentEl) {
 
 setAside(aside);
 setContent(content);
-
+//
+//return body;
+//
+//}
+//
+//module.exports = chat;
