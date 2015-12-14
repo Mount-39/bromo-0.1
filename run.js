@@ -5,7 +5,7 @@ var express = require('express'),
     http = require('http').Server(app),
     io = require('socket.io')(http),
     mongoose = require('mongoose'),
-    User = require('./core/models/user');
+    User = require('./core/backend/models/user');
 
 mongoose.connect('mongodb://localhost:27017/test');
 

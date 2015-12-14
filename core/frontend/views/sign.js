@@ -1,7 +1,4 @@
-/*
-var sign = function sign(){*/
-
-    var body = $('#page');
+var body = $('#page');
 
 //body.addClass('blur');
 
@@ -38,32 +35,42 @@ $('<input/>').attr({
     autocomplete: 'off'
 }).appendTo(form);
 
-$('<input/>').attr({
+var sign = $('<input/>').attr({
     type: 'submit',
     value: "Sign In"
 }).appendTo(form);
 
-$('<button/>', {id: "btn", }).text('Forgot Password?').appendTo(form);
+var forgot = $('<button/>', {id: "btn",}).text('Forgot Password?').appendTo(form);
 
 //=====================================
 
-var register = $('<div/>', {id:"register"}).appendTo(content);
+var register = $('<div/>', {id: "register"}).appendTo(content);
 
 $('<h5/>', {
     text: "Don't have an Account?"
 }).appendTo(register);
 
+
 $('<button/>', {
     class: "btn",
-    click: function(){
-        content.hide();
+    click: function () {
+        register.hide();
+        forgot.hide();
+        sign.attr({value: "Create", class: "reg"});
+
+        $('[type = email]').before(
+            $('<input/>', {
+                type: 'text',
+                required: "true",
+                method: "get",
+                placeholder: "Name",
+                autocomplete: 'off'
+            })
+        );
+
+        $('[type = text]').addClass("reg");
+        $('[type = email]').addClass("reg");
+        $('[type = password]').addClass("reg");
 
     }
 }).text('Create Account Now').appendTo(register);
-
-/*
-    return body;
-
-}
-
-module.exports = sign;*/
