@@ -49,7 +49,7 @@ app.use('/', router);
 // CONFIGURING SOCKET.IO
 io.on('connect', function (socket) {
 
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function (asdasd) {
         console.log('user disconnected');
     });
 
