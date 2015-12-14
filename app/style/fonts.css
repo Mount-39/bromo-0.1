@@ -1,10 +1,10 @@
 @font-face {
     font-family: pier;
-    src: url(pier-regular.otf);
+    src: url(fonts/pier-regular.otf);
 }
 
 @font-face {
     font-family: pier;
 	font-weight: bold;
-    src: url(pier-bold.otf);
+    src: url(fonts/pier-bold.otf);
 }
