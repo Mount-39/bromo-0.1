@@ -39,16 +39,10 @@ var sign = function () {
     sign.on('click', function () {
         $.ajax({
             type: "POST",
-            url: '/authorization',
-            // url: '/registration'
+            url: '/',
             data: {
                 email: $('[type = email]').val(),
                 password: $('[type = password]').val()
-                // username: ''
-            },
-            success: function(data)
-            {
-                alert(data); // show response from the php script.
             }
         });
     });

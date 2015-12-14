@@ -47,8 +47,9 @@ router.use('/style', express.static(folder + '/style'));
 router.post('/', function (req, res) {
     console.log(req.body);
 });
-
-
+router.post('/authorization', function (req, res) {
+    console.log(req.body);
+});
 
 app.use('/', router);
 ///////////////////////////////////////////
