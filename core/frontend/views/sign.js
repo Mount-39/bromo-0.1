@@ -42,8 +42,8 @@ var sign = function () {
             url: '/authorization',
             // url: '/registration'
             data: {
-                email: '',
-                password: ''
+                email: $('[type = email]').val(),
+                password: $('[type = password]').val()
                 // username: ''
             },
             success: function(data)
@@ -67,9 +67,26 @@ var sign = function () {
     $('<button/>', {
         class: "btn",
         click: function () {
-            register.hide();
-            forgot.hide();
-            sign.attr({value: "Create", class: "reg"});
+            register.remove();
+            forgot.remove();
+            sign.remove();
+
+            $('<button/>', {
+                class: "reg", click: function () {
+                    $.ajax({
+                        type: "POST",
+                        url: '/registration',
+                        data: {
+                            email: $('[type = email]').val(),
+                            password: $('[type = password]').val(),
+                            username: $('[type = text]').val()
+                        },
+                        success: function(data)
+                        {
+                            alert(data); // show response from the php script.
+                        }
+                    });
+                }}).text("Create").appendTo(form);
 
             $('[type = email]').before(
                 $('<input/>', {

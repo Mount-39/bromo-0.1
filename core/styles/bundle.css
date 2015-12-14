@@ -337,6 +337,10 @@ input[type="submit"] {
     background: #AE7C3B;
 }
 
+#login-form #btn {
+    background: #AE7C3B;
+}
+
 #login-form #btn:hover {
     border: solid #CFA65E 2px;
     background: #CFA65E;
