@@ -24,10 +24,12 @@ var destination = {
     js: './app/js'
 };
 
+// WATCHERS
 gulp.task('default', function () {
     gulp.start([
         'wcss',
-        'wjs'
+        'wjs',
+        'wview'
     ]);
 });
 
@@ -72,6 +74,7 @@ gulp.task("wjs", function () {
 });
 ///////////////////////////////////////////
 
+// VIEWS JS
 gulp.task('view', function () {
     gulp.src([
         source.js.view.sign,
@@ -81,3 +84,15 @@ gulp.task('view', function () {
         .pipe(uglify())
         .pipe(gulp.dest(destination.js));
 });
+gulp.task('wview', function () {
+    gulp.start([
+        'view'
+    ]);
+
+    gulp.watch([
+        source.js.view.sign,
+        source.js.view.chat
+    ], [ 'view' ]);
+});
+///////////////////////////////////////////
+
