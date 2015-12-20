@@ -46,9 +46,11 @@ router.use('/js', express.static(folder + '/js'));
 router.use('/style', express.static(folder + '/style'));
 router.post('/registration', function (req, res) {
     console.log(req.body);
+    res.send('success registration post');
 });
 router.post('/authorization', function (req, res) {
     console.log(req.body);
+    res.send('success authorization post');
 });
 
 app.use('/', router);

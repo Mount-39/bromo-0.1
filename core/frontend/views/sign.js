@@ -41,10 +41,13 @@ var sign = function () {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: '/registration',
+            url: '/authorization',
             data: {
                 email: $('[type = email]').val(),
                 password: $('[type = password]').val()
+            },
+            success: function(data) {
+                console.log(data);
             }
         })
     });
@@ -77,9 +80,8 @@ var sign = function () {
                             password: $('[type = password]').val(),
                             username: $('[type = text]').val()
                         },
-                        success: function(data)
-                        {
-                            alert(data); // show response from the php script.
+                        success: function(data) {
+                            console.log(data);
                         }
                     });
                 }}).text("Create").appendTo(form);
