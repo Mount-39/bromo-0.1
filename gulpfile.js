@@ -2,8 +2,7 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    minify = require('gulp-minify-css'),
-    rename = require('gulp-rename');
+    minify = require('gulp-minify-css');
 
 var source = {
     css: {

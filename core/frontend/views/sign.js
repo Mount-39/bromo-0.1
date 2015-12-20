@@ -21,7 +21,6 @@ var sign = function () {
     $('<input/>').attr({
         type: 'email',
         required: "true",
-        method: "get",
         placeholder: "Email",
         autocomplete: 'off'
     }).appendTo(form);
@@ -29,22 +28,25 @@ var sign = function () {
     $('<input/>').attr({
         type: 'password',
         required: "true",
-        method: "get",
         placeholder: "Password",
         autocomplete: 'off'
     }).appendTo(form);
 
-    var sign = $('<button/>').text('Sign In').appendTo(form);
+    var sign = $('<input/>').attr({
+        value: 'Sign In',
+        type: 'submit'
+    }).appendTo(form);
 
-    sign.on('click', function () {
+    form.submit( function (e) {
+        e.preventDefault();
         $.ajax({
             type: "POST",
-            url: '/',
+            url: '/registration',
             data: {
                 email: $('[type = email]').val(),
                 password: $('[type = password]').val()
             }
-        });
+        })
     });
 
     var forgot = $('<button/>', {id: "btn"}).text('Forgot Password?').appendTo(form);
