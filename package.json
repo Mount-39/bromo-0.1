@@ -7,15 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "4.2.2"
+    "node": "4.2.2",
+    "npm": "3.4.x"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Mount-39/Bromo.git"
-  },
-  "engines": {
-  	"node": "4.2.2",
-  	"npm": "3.4.x"
   },
   "keywords": [
     "Bromo"
@@ -32,7 +29,8 @@
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "mongoose": "^4.2.9",
-    "socket.io": "^1.3.7"
+    "socket.io": "^1.3.7",
+    "gulp": "~3.9.0"
   },
   "devDependencies": {
     "express": "^4.13.3"
