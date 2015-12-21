@@ -73,6 +73,7 @@ var sign = function () {
             //sign.remove();
 
             var registration = $('<form/>', {}).appendTo(fieldset);
+            var error = $('<div/>', {id: "register"}).appendTo(content);
 
             $('<input/>').attr({
                 type: 'email',
@@ -99,6 +100,20 @@ var sign = function () {
                             username: $('[type = text]').val()
                         },
                         success: function(data) {
+
+                            if(data.result == "true"){
+
+                            }
+
+                            else{
+
+                                error.empty();
+
+                                $('<h5/>', {
+                                    text: "That Username or Email is already exist!"
+                                }).appendTo(error);
+                            }
+
                             console.log(data);
                         }
                     });
