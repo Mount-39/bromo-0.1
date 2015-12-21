@@ -47,6 +47,8 @@ var sign = function () {
                 password: $('[type = password]').val()
             },
             success: function(data) {
+                body.empty();
+                chat();
                 console.log(data);
             }
         })
@@ -102,7 +104,8 @@ var sign = function () {
                         success: function(data) {
 
                             if(data.result == "true"){
-
+                                body.empty();
+                                chat();
                             }
 
                             else{
@@ -110,7 +113,7 @@ var sign = function () {
                                 error.empty();
 
                                 $('<h5/>', {
-                                    text: "That Username or Email is already exist!"
+                                    text: data.error
                                 }).appendTo(error);
                             }
 
