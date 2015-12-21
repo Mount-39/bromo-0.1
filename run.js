@@ -45,8 +45,15 @@ router.get('/', function (req, res) {
 router.use('/js', express.static(folder + '/js'));
 router.use('/style', express.static(folder + '/style'));
 router.post('/registration', function (req, res) {
-    console.log(req.body);
-    res.send('success registration post');
+    var data = req.body;
+    var user = new User({
+        email: data.email,
+        password: data.password,
+        username: data.username
+    });
+    try {
+        user.save()
+    }
 });
 router.post('/authorization', function (req, res) {
     console.log(req.body);
