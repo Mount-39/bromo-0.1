@@ -100,6 +100,7 @@ var sign = function () {
                         },
                         success: function(data) {
                             console.log(data);
+                            main();
                         }
                     });
                 }}).text("Create").appendTo(registration);
