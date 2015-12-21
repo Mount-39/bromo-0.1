@@ -9,8 +9,7 @@ var parser = require('body-parser');
 ///////////////////////////////////////////
 
 // SETTING UP SOCKET.IO
-var io = require('socket.io')(http);
-///////////////////////////////////////////
+var io = require('./core/backend/socket')(http);
 
 // SETTING UP MONGO
 var User = require('./core/backend/models/user');
@@ -54,32 +53,25 @@ router.post('/registration', function (req, res) {
     });
     user.save(function (error) {
         if (error) {
-            console.log(error);
-            res.send({
-                error: error
-            });
+            res.send(false);
+        } else {
+            res.send(true);
         }
     })
 });
 router.post('/authorization', function (req, res) {
-    //console.log(req.body);
+    var data = req.body;
+    mongoose.models['user'].findOne({ email: data.email, password: data.password }, function (err, user) {
+        if(user){
+            res.send(true);
+            io();
+        } else {
+            res.send(false);
+        }
+    });
 });
 
 app.use('/', router);
-///////////////////////////////////////////
-
-// CONFIGURING SOCKET.IO
-io.on('connect', function (socket) {
-
-    socket.on('disconnect', function (asdasd) {
-        console.log('user disconnected');
-    });
-
-    socket.on('message', function (message) {
-        socket.broadcast.emit('message', message);
-    });
-
-});
 ///////////////////////////////////////////
 
 // START UP SERVER
