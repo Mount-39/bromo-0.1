@@ -56,7 +56,8 @@ router.post('/registration', function (req, res) {
         if (error) {
             console.log(error);
             res.send({
-                result: false
+                result: false,
+                error: error.message
             });
         } else {
             res.send({
