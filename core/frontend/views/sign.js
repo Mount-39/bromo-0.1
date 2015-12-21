@@ -99,8 +99,7 @@ var sign = function () {
                             username: $('[type = text]').val()
                         },
                         success: function(data) {
-
-                            console.log(data.toString());
+                            console.log(data);
                         }
                     });
                 }}).text("Create").appendTo(registration);
