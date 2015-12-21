@@ -2,8 +2,7 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    minify = require('gulp-minify-css'),
-    rename = require('gulp-rename');
+    minify = require('gulp-minify-css');
 
 var source = {
     css: {
@@ -24,7 +23,6 @@ var destination = {
     js: './app/js'
 };
 
-// WATCHERS
 gulp.task('default', function () {
     gulp.start([
         'wcss',
@@ -74,7 +72,7 @@ gulp.task("wjs", function () {
 });
 ///////////////////////////////////////////
 
-// VIEWS JS
+// VIEW JS
 gulp.task('view', function () {
     gulp.src([
         source.js.view.sign,
@@ -88,11 +86,9 @@ gulp.task('wview', function () {
     gulp.start([
         'view'
     ]);
-
     gulp.watch([
         source.js.view.sign,
         source.js.view.chat
     ], [ 'view' ]);
 });
 ///////////////////////////////////////////
-
