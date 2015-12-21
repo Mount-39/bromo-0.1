@@ -52,7 +52,6 @@ var sign = function () {
         //})
     });
 
-    var forgot = $('<button/>', {id: "btn"}).text('Forgot Password?').appendTo(form);
 
 //=====================================
 
@@ -63,12 +62,31 @@ var sign = function () {
     }).appendTo(register);
 
 
+
     $('<button/>', {
         class: "btn",
         click: function () {
+
+            form.remove();
             register.remove();
-            forgot.remove();
-            sign.remove();
+            //forgot.remove();
+            //sign.remove();
+
+            var registration = $('<form/>', {}).appendTo(fieldset);
+
+            $('<input/>').attr({
+                type: 'email',
+                required: "true",
+                placeholder: "Email",
+                autocomplete: 'off'
+            }).appendTo(registration);
+
+            $('<input/>').attr({
+                type: 'password',
+                required: "true",
+                placeholder: "Password",
+                autocomplete: 'off'
+            }).appendTo(registration);
 
             $('<button/>', {
                 class: "reg", click: function () {
@@ -81,10 +99,11 @@ var sign = function () {
                             username: $('[type = text]').val()
                         },
                         success: function(data) {
-                            console.log(data);
+
+                            console.log(data.toString());
                         }
                     });
-                }}).text("Create").appendTo(form);
+                }}).text("Create").appendTo(registration);
 
             $('[type = email]').before(
                 $('<input/>', {
@@ -99,6 +118,10 @@ var sign = function () {
             $('[type = text]').addClass("reg");
             $('[type = email]').addClass("reg");
             $('[type = password]').addClass("reg");
+
+            registration.submit( function (e) {
+                e.preventDefault();
+            });
 
         }
     }).text('Create Account Now').appendTo(register);
