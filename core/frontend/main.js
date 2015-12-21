@@ -1,4 +1,4 @@
-(function () {
+var main = (function () {
     var socket = io();
 
     $(document).ready(function () {
@@ -42,4 +42,4 @@
         message.val('');
     }
 
-})();
+});

@@ -39,17 +39,17 @@ var sign = function () {
 
     form.submit( function (e) {
         e.preventDefault();
-        //$.ajax({
-        //    type: "POST",
-        //    url: '/authorization',
-        //    data: {
-        //        email: $('[type = email]').val(),
-        //        password: $('[type = password]').val()
-        //    },
-        //    success: function(data) {
-        //        console.log(data);
-        //    }
-        //})
+        $.ajax({
+            type: "POST",
+            url: '/authorization',
+            data: {
+                email: $('[type = email]').val(),
+                password: $('[type = password]').val()
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        })
     });
 
 
@@ -99,8 +99,7 @@ var sign = function () {
                             username: $('[type = text]').val()
                         },
                         success: function(data) {
-
-                            console.log(data.toString());
+                            console.log(data);
                         }
                     });
                 }}).text("Create").appendTo(registration);

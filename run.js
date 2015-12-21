@@ -53,6 +53,7 @@ router.post('/registration', function (req, res) {
     });
     user.save(function (error) {
         if (error) {
+            console.log(error);
             res.send(false);
         } else {
             res.send(true);
