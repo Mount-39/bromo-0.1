@@ -47,9 +47,15 @@ var sign = function () {
                 password: $('[type = password]').val()
             },
             success: function(data) {
-                body.empty();
-                chat();
-                console.log(data);
+
+                if(data == true){
+                    body.empty();
+                    chat();
+                }
+
+                else{
+
+                }
             }
         })
     });
@@ -103,7 +109,9 @@ var sign = function () {
                         },
                         success: function(data) {
 
-                            if(data.result == "true"){
+                            console.log(data.result);
+
+                            if(data.result == true){
                                 body.empty();
                                 chat();
                             }
