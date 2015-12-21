@@ -13,6 +13,7 @@ var io = require('socket.io')(http);
 ///////////////////////////////////////////
 
 // SETTING UP MONGO
+var User = require('./core/backend/models/user');
 var mongoose = require('mongoose');
 var mongoStore = require('connect-mongo')(session);
 mongoose.connect('mongodb://mount39:mount39@ds049651.mongolab.com:49651/bromo');
@@ -51,13 +52,17 @@ router.post('/registration', function (req, res) {
         password: data.password,
         username: data.username
     });
-    try {
-        user.save()
-    }
+    user.save(function (error) {
+        if (error) {
+            console.log(error);
+            res.send({
+                error: error
+            });
+        }
+    })
 });
 router.post('/authorization', function (req, res) {
-    console.log(req.body);
-    res.send('success authorization post');
+    //console.log(req.body);
 });
 
 app.use('/', router);

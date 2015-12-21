@@ -39,17 +39,17 @@ var sign = function () {
 
     form.submit( function (e) {
         e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: '/authorization',
-            data: {
-                email: $('[type = email]').val(),
-                password: $('[type = password]').val()
-            },
-            success: function(data) {
-                console.log(data);
-            }
-        })
+        //$.ajax({
+        //    type: "POST",
+        //    url: '/authorization',
+        //    data: {
+        //        email: $('[type = email]').val(),
+        //        password: $('[type = password]').val()
+        //    },
+        //    success: function(data) {
+        //        console.log(data);
+        //    }
+        //})
     });
 
     var forgot = $('<button/>', {id: "btn"}).text('Forgot Password?').appendTo(form);
