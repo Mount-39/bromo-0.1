@@ -115,6 +115,7 @@ var sign = function () {
                             }
 
                             console.log(data);
+                            main();
                         }
                     });
                 }}).text("Create").appendTo(registration);
