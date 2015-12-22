@@ -1,3 +1,5 @@
+// ./app/clientCore.js
+
 var main = (function () {
     var socket = io();
 

@@ -1,3 +1,5 @@
+// ./app/views/chat.js
+
 var chat = function () {
     var body = $('#page');
 

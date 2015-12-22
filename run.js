@@ -1,31 +1,32 @@
-// SETTING UP THE SERVER
-var express = require('express');
-var router = express.Router();
-var app = express();
-var http = require('http').Server(app);
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var parser = require('body-parser');
+// EXPRESS 4
+var express         = require('express');
+var app             = express();
+var http            = require('http').Server(app);
 ///////////////////////////////////////////
 
-// SETTING UP SOCKET.IO
-var io = require('socket.io')(http);
+// SOCKET.IO
+var io              = require('socket.io')(http);
+require('./app/socket')(io);
+///////////////////////////////////////////
+
+// EXPRESS MIDDLEWARE
+var morgan          = require('morgan');
+var cookieParser    = require('cookie-parser');
+var session         = require('express-session');
+var mongoStore      = require('connect-mongo')(session);
+var parser          = require('body-parser');
+var router          = express.Router();
 ///////////////////////////////////////////
 
 // SETTING UP MONGO
-var User = require('./core/backend/models/user');
-var mongoose = require('mongoose');
-var mongoStore = require('connect-mongo')(session);
-mongoose.connect('mongodb://mount39:mount39@ds049651.mongolab.com:49651/bromo');
+var mongoConfig     = require('./config/database');
+var mongoose        = require('mongoose');
+mongoose.connect(mongoConfig.url);
 ///////////////////////////////////////////
 
-// SETTING UP PORT AND STATIC FOLDER
-var port = process.env.PORT || 8080,
-    folder = __dirname + '/app/';
-///////////////////////////////////////////
-
-// SETTING UP COOKIES & SESSION
+// SETTING UP APP
 app.use(parser());
+app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
     secret: 'r2d2',
@@ -33,71 +34,13 @@ app.use(session({
         mongooseConnection: mongoose.connection
     })
 }));
-///////////////////////////////////////////
-
-// CONFIGURING ROUTES
-router.use(function (req, res, next) {
-    //console.log(req.method, req.url);
-    next();
-});
-router.get('/', function (req, res) {
-    res.sendFile(folder + 'index.html');
-});
-router.use('/js', express.static(folder + '/js'));
-router.use('/style', express.static(folder + '/style'));
-router.post('/registration', function (req, res) {
-    var data = req.body;
-    var user = new User({
-        email: data.email,
-        password: data.password,
-        username: data.username
-    });
-    user.save(function (error) {
-        if (error) {
-            console.log(error);
-            res.send({
-                result: false,
-                error: error.message
-            });
-        } else {
-            res.send({
-                result: true,
-                username: user.username
-            });
-        }
-    })
-});
-router.post('/authorization', function (req, res) {
-    var data = req.body;
-    mongoose.models['user'].findOne({ email: data.email, password: data.password }, function (err, user) {
-        if(user){
-            res.send(true);
-        } else {
-            res.send(false);
-        }
-    });
-});
-
-app.use('/', router);
-///////////////////////////////////////////
-
-// CONFIGURING SOCKET.IO
-io.on('connect', function (socket) {
-
-    console.log('user connected');
-
-    socket.on('disconnect', function (asdasd) {
-        console.log('user disconnected');
-    });
-
-    socket.on('message', function (message) {
-        socket.broadcast.emit('message', message);
-    });
-
-});
+app.use(express.static(__dirname + '/public'));
+require('./app/routes')(app, router);
 ///////////////////////////////////////////
 
 // START UP SERVER
+var port = process.env.PORT || 8080;
 http.listen(port, function () {
     console.log('Bromo is running on port ' + port);
 });
+///////////////////////////////////////////

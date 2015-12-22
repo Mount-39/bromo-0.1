@@ -1,3 +1,5 @@
+// ./app/views/sign.js
+
 $(function() {
 
     var sign = function () {
