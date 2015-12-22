@@ -49,6 +49,7 @@ $(function() {
                     password: $('[type = password]').val()
                 },
                 success: function (data) {
+                    $('[class = error]').remove();
 
                     if (data == true) {
                         body.empty();
@@ -56,12 +57,10 @@ $(function() {
                     }
 
                     else {
-
                         sign.before($('<div/>', {
                             class: 'error',
-                            text: 'Email or Password is incorrect!'
+                            text: "Email or Password is incorrect!"
                         }));
-
                     }
                 }
             })
@@ -114,8 +113,8 @@ $(function() {
                                 username: $('[type = text]').val()
                             },
                             success: function (data) {
-
                                 error.empty();
+
                                 console.log(data.result);
 
                                 if (data.result == true) {

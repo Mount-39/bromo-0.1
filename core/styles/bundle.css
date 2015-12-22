@@ -352,3 +352,9 @@ input[type="submit"] {
     background: rgba(224, 224, 224, 0.1);
     text-decoration: none;
 }
+
+.error {
+    margin: 10px 0px;
+    padding:12px;
+    color: #D8000C;
+}
