@@ -4,7 +4,7 @@ module.exports = function (io) {
 
     io.on('connect', function (socket) {
 
-        console.dir(socket, { depth: 1 });
+        console.log('User connceted: ', socket.handshake.session.username);
 
         // WHEN DISCONNECT
         socket.on('disconnect', function (asdasd) {

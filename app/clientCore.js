@@ -1,6 +1,7 @@
 // ./app/clientCore.js
 
 var socket = io();
+console.log('Socket is on fire', socket);
 
 var main = function () {
     var socket = io();

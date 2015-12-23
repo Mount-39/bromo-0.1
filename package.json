@@ -33,7 +33,8 @@
     "express-session": "^1.12.1",
     "mongoose": "^4.2.9",
     "morgan": "^1.6.1",
-    "socket.io": "^1.3.7"
+    "socket.io": "^1.3.7",
+    "socket.io-express-session": "^0.1.3"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

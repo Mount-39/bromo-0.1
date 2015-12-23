@@ -11,7 +11,9 @@ $ cd Bromo/
 ```
 Then use
 ```
-$ npm install 
+$ npm install
+
+$ bower install
 ```
 ### Start Bromo
 After this simple actions You are ready to start our chat on `localhost`
