@@ -8,6 +8,7 @@ module.exports = function (app, router) {
         res.sendFile(folder + 'index.html');
     });
 
+    // TODO instead of post requests use Socket.on & Socket.emit
     // POST REQUESTS
     router.post('/registration', function (req, res) {
         var data = req.body;
@@ -24,6 +25,7 @@ module.exports = function (app, router) {
                     error: error.message
                 });
             } else {
+                req.session.user = data.username;
                 res.send({
                     result: true,
                     username: user.username
@@ -35,6 +37,7 @@ module.exports = function (app, router) {
         var data = req.body;
         mongoose.models['user'].findOne({email: data.email, password: data.password}, function (err, user) {
             if (user) {
+                req.session.name = user.name;
                 res.send(true);
             } else {
                 res.send(false);

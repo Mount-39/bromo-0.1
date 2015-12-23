@@ -1,6 +1,8 @@
 // ./app/clientCore.js
 
-var main = (function () {
+var socket = io();
+
+var main = function () {
     var socket = io();
 
     $(document).ready(function () {
@@ -44,4 +46,8 @@ var main = (function () {
         message.val('');
     }
 
-});
+};
+
+var setSocket = function () {
+
+};
