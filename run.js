@@ -31,14 +31,14 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session);
 app.use(express.static(__dirname + '/public'));
-require('./app/routes')(app, router);
+require('./app/routes')(app, router, mongoose);
 ///////////////////////////////////////////
 
 // SOCKET.IO
 var io              = require('socket.io')(http);
 var ioSession       = require('socket.io-express-session');
 io.use(ioSession(session));
-require('./app/socket')(io);
+require('./app/socket')(io, mongoose);
 ///////////////////////////////////////////
 
 // START UP SERVER
