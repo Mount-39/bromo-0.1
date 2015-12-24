@@ -31,7 +31,6 @@ module.exports = function (io, mongoose) {
                     login(user);
                 }
             });
-
         } else { // if session user doesn't exist - go to sign form
             sign();
         }
@@ -86,9 +85,9 @@ module.exports = function (io, mongoose) {
             });
             socket.emit('login', user);
             io.emit('join', users);
-            /***
-             * Do some stuff here with messages
-             */
+            socket.on('message', function (message) {
+                socket.broadcast.emit('message', message);
+            })
         };
 
     });
