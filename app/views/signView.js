@@ -50,7 +50,7 @@ var createSignView = function (socket) {
             password: $('[type = password]').val()
         };
 
-        socket.emit('login', data)
+        socket.emit('login', data);
     });
 
 
@@ -96,9 +96,9 @@ var createSignView = function (socket) {
                         email: $('[type = email]').val(),
                         password: $('[type = password]').val(),
                         username: $('[type = text]').val()
-                    }
+                    };
 
-                    socket.emit('regisration', data)
+                    socket.emit('registration', data);
 
                 }
             }).text("Create").appendTo(registration);

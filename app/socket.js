@@ -29,9 +29,9 @@ module.exports = function (io, mongoose) {
 
             socket.on('registration', function (user) {
                 var user = require('./models/user')({
-                    email: session.email,
-                    username: session.username,
-                    password: session.password
+                    email: user.email,
+                    username: user.username,
+                    password: user.password
                 });
                 user.save(function (error) {
                     if (error) {
@@ -45,8 +45,8 @@ module.exports = function (io, mongoose) {
 
             socket.on('login', function (user) {
                 mongoose.models['user'].findOne({
-                    email: session.email,
-                    password: session.password
+                    email: user.email,
+                    password: user.password
                 }, function (error, user) {
                     if (user) {
                         setSession(user);
