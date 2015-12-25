@@ -1,6 +1,9 @@
 // ./app/views/chat.js
 
-var chat = function () {
+// TODO покрыть каждый компонент вокруг комментами
+// TODO ибо пиздец запутаться легко
+var createChatView = function () {
+
     var body = $('#page');
 
 //========================

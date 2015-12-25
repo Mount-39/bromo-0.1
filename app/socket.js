@@ -18,23 +18,6 @@ module.exports = function (io, mongoose) {
             session.username = user.username;
             session.password = user.password;
         };
-        if (session.hasUser) {
-            // searching for user in our database
-            mongoose.models['user'].findOne({
-                email: session.email,
-                username: session.username,
-                password: session.password
-            }, function (error, user) {
-                // if session user is valid
-                // then logging
-                if (user) {
-                    login(user);
-                }
-            });
-        } else { // if session user doesn't exist - go to sign form
-            sign();
-        }
-        ///////////////////////////////////////////
 
         // entering the sign view here
         var sign = function () {
@@ -89,6 +72,23 @@ module.exports = function (io, mongoose) {
                 socket.broadcast.emit('message', message);
             })
         };
+
+        if (session.hasUser) {
+            // searching for user in our database
+            mongoose.models['user'].findOne({
+                email: session.email,
+                username: session.username,
+                password: session.password
+            }, function (error, user) {
+                // if session user is valid
+                // then logging
+                if (user) {
+                    login(user);
+                }
+            });
+        } else { // if session user doesn't exist - go to sign form
+            sign();
+        }
 
     });
 };

@@ -1,73 +1,23 @@
-// ./app/clientCore.js
-
-var signIn = require("./views/sign");
+// ./app/app.js
 
 var socket = io();
-console.log('Socket is on fire', socket);
 
-var main = function () {
-    var socket = io();
+socket.on('sign', function () {
+    // TODO on.loginError in signView
+    // TODO on.registrationError in signView
+    // TODO emit.login in signView
+    // TODO emit.registration in signView
+    createSignView(socket);
+});
 
-    $(document).ready(function () {
+socket.on('login', function (user) {
+    // TODO on.join in chatView
+    // TODO on.message in chatView
+    // TODO emit.message in chatView
+    createChatView(socket, user);
+});
 
-        var btnClick = function () {
-            var message = $('#message');
-            if (message) {
-                sendMessage(message.val());
-            }
-        };
+// при такой схеме не получится пока сделать logout нормальной
+// это только если вьюшки связывать, но хоть что-то пока будет норм
 
-        $('button').on('click', btnClick);
-
-        // get the message
-        socket.on('message', function (message) {
-            addMessage(message, 'inbox');
-        });
-
-        // some error on server
-        socket.on('alarm', function (e) {
-            alert(e);
-        })
-    });
-
-    socket.on('sign', function () {
-
-        signIn(socket);
-
-    });
-
-
-    socket.on('loginError', function (error) {
-
-    });
-
-    socket.on('registrationError', function (error) {
-
-    });
-
-
-
-    /**
-     *
-     * @param {string} message
-     * @param {string} className
-     */
-    function addMessage(message, className) {
-        $('ul#chat').append($('<li>').addClass(className).text(message));
-    }
-
-    /**
-     *
-     * @param {string} message
-     */
-    function sendMessage(message) {
-        socket.emit('message', message);
-        addMessage(message.val(), 'outbox');
-        message.val('');
-    }
-
-};
-
-var setSocket = function () {
-
-};
+// теперь app.js реально просто точка входа в приложение

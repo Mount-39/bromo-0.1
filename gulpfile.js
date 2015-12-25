@@ -11,8 +11,8 @@ var source = {
     },
     js: {
         view: {
-            chat: './app/views/chat.js',
-            sign: './app/views/sign.js'
+            chat: './app/views/chatView.js',
+            sign: './app/views/signView.js'
         },
         core: './app/app.js',
         jquery: './bower_components/jquery/dist/jquery.js'
@@ -37,7 +37,9 @@ gulp.task('css', function () {
     gulp.src([
         source.css.bundle
     ])
-        .pipe(concat('style.min.css'))
+        .pipe(concat('styles.css'))
+        .pipe(gulp.dest(destination.css))
+        .pipe(rename("styles.min.css"))
         .pipe(minify())
         .pipe(gulp.dest(destination.css));
 });
