@@ -9209,7 +9209,7 @@ return jQuery;
 
 }));
 
-// ./app/clientCore.js
+// ./app/app.js
 
 var socket = io();
 console.log('Socket is on fire', socket);

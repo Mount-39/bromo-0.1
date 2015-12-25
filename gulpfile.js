@@ -14,7 +14,7 @@ var source = {
             chat: './app/views/chat.js',
             sign: './app/views/sign.js'
         },
-        core: './app/clientCore.js',
+        core: './app/app.js',
         jquery: './bower_components/jquery/dist/jquery.js'
     }
 };

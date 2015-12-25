@@ -1,5 +1,7 @@
 // ./app/clientCore.js
 
+var signIn = require("./views/sign");
+
 var socket = io();
 console.log('Socket is on fire', socket);
 
@@ -27,6 +29,23 @@ var main = function () {
             alert(e);
         })
     });
+
+    socket.on('sign', function () {
+
+        signIn(socket);
+
+    });
+
+
+    socket.on('loginError', function (error) {
+
+    });
+
+    socket.on('registrationError', function (error) {
+
+    });
+
+
 
     /**
      *
