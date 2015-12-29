@@ -4,7 +4,18 @@ module.exports = function (io) {
 
     io.on('connect', function (socket) {
 
-        console.dir(socket, { depth: 1 });
+        socket.on('connect', function () {
+
+            var session = socket.handshake.session;
+
+            users.push({
+                username: session.username,
+                email : session.email
+            });
+
+            console.log(users);
+
+        });
 
         // WHEN DISCONNECT
         socket.on('disconnect', function (asdasd) {

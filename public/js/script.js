@@ -3934,7 +3934,7 @@ jQuery.extend({
 		}
 	},
 
-	// Not app - generate a queueHooks object, or return the current one
+	// Not public - generate a queueHooks object, or return the current one
 	_queueHooks: function( elem, type ) {
 		var key = type + "queueHooks";
 		return data_priv.get( elem, key ) || data_priv.access( elem, key, {
@@ -4078,7 +4078,7 @@ function safeActiveElement() {
 }
 
 /*
- * Helper functions for managing events -- not part of the app interface.
+ * Helper functions for managing events -- not part of the public interface.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
 jQuery.event = {
@@ -9214,29 +9214,6 @@ return jQuery;
 var socket = io();
 
 var main = function () {
-    var socket = io();
-
-    $(document).ready(function () {
-
-        var btnClick = function () {
-            var message = $('#message');
-            if (message) {
-                sendMessage(message.val());
-            }
-        };
-
-        $('button').on('click', btnClick);
-
-        // get the message
-        socket.on('message', function (message) {
-            addMessage(message, 'inbox');
-        });
-
-        // some error on server
-        socket.on('alarm', function (e) {
-            alert(e);
-        })
-    });
 
     /**
      *
@@ -9256,9 +9233,5 @@ var main = function () {
         addMessage(message.val(), 'outbox');
         message.val('');
     }
-
-};
-
-var setSocket = function () {
 
 };

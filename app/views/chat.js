@@ -76,4 +76,8 @@ var chat = function () {
 
     setAside(aside);
     setContent(content);
+
+    // socket.io on fire!
+    console.log('socket on');
+    main();
 };

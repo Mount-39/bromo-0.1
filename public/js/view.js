@@ -126,7 +126,7 @@ $(function() {
 
                                 if(data.error.indexOf("E11000") >= 0){
                                     $('<h5/>', {
-                                        text: "That username is already exist!"
+                                        text: "This username is already exists!"
                                     }).appendTo(error);
                                 }
 
@@ -247,4 +247,8 @@ var chat = function () {
 
     setAside(aside);
     setContent(content);
+
+    // socket.io on fire!
+    console.log('socket on');
+    main();
 };
