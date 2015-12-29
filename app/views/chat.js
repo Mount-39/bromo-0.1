@@ -5,6 +5,25 @@ var chat = function () {
 
 //========================
 
+    /**
+     *
+     * @param {string} message
+     * @param {string} className
+     */
+    function addMessage(message, className) {
+        $('div#chat ul').append($('li').addClass(className).text(message));
+    }
+
+    /**
+     *
+     * @param {string} message
+     */
+    function sendMessage(message) {
+        socket.emit('message', message);
+        addMessage(message.val(), 'outbox');
+        message.val('');
+    }
+
     var aside = $('<aside/>', {
         id: 'sidebar'
     }).appendTo(body);
@@ -65,8 +84,8 @@ var chat = function () {
 
         $('<button/>',
             {
-                text: 'Send'
-                //     click: function () { alert('AHAHAHAH'); }
+                text: 'Send',
+                click: function () { sendMessage($('#message')) }
             }).appendTo(form);
 
         contentEl.append(form);
@@ -77,7 +96,7 @@ var chat = function () {
     setAside(aside);
     setContent(content);
 
-    // socket.io on fire!
-    console.log('socket on');
-    main();
+    socket.on('message', function (message) {
+        addMessage(message, 'inbox');
+    })
 };

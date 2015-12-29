@@ -25,8 +25,8 @@ module.exports = function (app, router) {
                     error: error.message
                 });
             } else {
-                req.session.username = data.username;
-                req.session.email = data.email;
+                req.session.username = user.username;
+                req.session.email = user.email;
                 res.send({
                     result: true,
                     username: user.username
@@ -38,8 +38,8 @@ module.exports = function (app, router) {
         var data = req.body;
         mongoose.models['user'].findOne({email: data.email, password: data.password}, function (err, user) {
             if (user) {
-                req.session.username = data.username;
-                req.session.email = data.email;
+                req.session.username = user.username;
+                req.session.email = user.email;
                 res.send(true);
             } else {
                 res.send(false);

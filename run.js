@@ -4,6 +4,10 @@ var app             = express();
 var http            = require('http').Server(app);
 ///////////////////////////////////////////
 
+// USERS
+var users = [];
+///////////////////////////////////////////
+
 // CONFIG
 var config          = require('./config/config');
 ///////////////////////////////////////////
@@ -34,14 +38,14 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session);
 app.use(express.static(__dirname + '/public'));
-require('./app/routes')(app, router);
+require('./app/routes')(app, router, users);
 ///////////////////////////////////////////
 
 // SOCKET.IO
 var io              = require('socket.io')(http);
 var ioSession       = require('socket.io-express-session');
 io.use(ioSession(session));
-require('./app/socket')(io);
+require('./app/socket')(io, users);
 ///////////////////////////////////////////
 
 // START UP SERVER
