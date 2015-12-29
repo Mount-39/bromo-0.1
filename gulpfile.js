@@ -7,7 +7,7 @@ var minify          = require('gulp-minify-css');
 
 var source = {
     css: {
-        bundle: './css/bundle.css'
+        bundle: './styles/bundle.css'
     },
     js: {
         view: {
@@ -20,7 +20,7 @@ var source = {
 };
 
 var destination = {
-    css: './public/css',
+    css: './public/styles',
     js: './public/js'
 };
 

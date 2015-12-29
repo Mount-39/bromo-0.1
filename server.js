@@ -2,15 +2,6 @@
 var express         = require('express');
 var app             = express();
 var http            = require('http').Server(app);
-///////////////////////////////////////////
-
-// USERS
-var users = [];
-///////////////////////////////////////////
-
-// CONFIG
-var config          = require('./config/config');
-///////////////////////////////////////////
 
 // EXPRESS MIDDLEWARE
 var morgan          = require('morgan');
@@ -19,7 +10,9 @@ var expressSession  = require('express-session');
 var mongoStore      = require('connect-mongo')(expressSession);
 var parser          = require('body-parser');
 var router          = express.Router();
-///////////////////////////////////////////
+
+// CONFIG
+var config          = require('./app/config');
 
 // SETTING UP MONGO
 var mongoose        = require('mongoose');
@@ -38,14 +31,12 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session);
 app.use(express.static(__dirname + '/public'));
-require('./app/routes')(app, router, users);
+app.use('/api', require('./app/routes').api());
 ///////////////////////////////////////////
 
 // SOCKET.IO
 var io              = require('socket.io')(http);
-var ioSession       = require('socket.io-express-session');
-io.use(ioSession(session));
-require('./app/socket')(io, users);
+io.on('connect', require('./app/socket')());
 ///////////////////////////////////////////
 
 // START UP SERVER
