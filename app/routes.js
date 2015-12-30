@@ -19,8 +19,8 @@ module.exports.api = function (app) {
     }
 
     function addUser(user) {
-        for(var i in app.usersOnline){
-            if(user.email == app.usersOnline[i].email){
+        for (var i in app.usersOnline) {
+            if (user.email == app.usersOnline[i].email) {
                 return false;
             }
         }
@@ -28,6 +28,16 @@ module.exports.api = function (app) {
             username: user.username,
             email: user.email
         });
+    }
+
+    function removeUser(user) {
+        for (var i in app.usersOnline) {
+            if (user.email == app.usersOnline[i].email) {
+                app.usersOnline.splice(i, 1);
+                return true;
+            }
+        }
+        return false;
     }
 
     router.post('/authorization', function (req, res) {
@@ -90,14 +100,14 @@ module.exports.api = function (app) {
 
     function verifyToken(req, res, next) {
         var token = req.body.token || req.headers['x-access-token'];
-        if(!token){
+        if (!token) {
             res.json({
                 success: false,
                 message: 'there is no token attached'
             });
         } else {
             jwt.verify(token, secret, function (err, decoded) {
-                if(err) {
+                if (err) {
                     throw err;
                 }
                 req.decoded = decoded;
@@ -107,7 +117,7 @@ module.exports.api = function (app) {
     }
 
     router.get('/users', verifyToken, function (req, res) {
-        if(req.decoded){
+        if (req.decoded) {
             res.json({
                 success: true,
                 users: app.usersOnline
@@ -119,6 +129,20 @@ module.exports.api = function (app) {
             });
         }
 
+    });
+    router.get('/logout', verifyToken, function (req, res) {
+        if (req.decoded) {
+            var user = req.decoded;
+            var success = removeUser(user);
+            res.json({
+                success: success
+            });
+        } else {
+            res.json({
+                success: false,
+                message: 'Ooops!'
+            });
+        }
     });
 
     return router;
