@@ -7,14 +7,13 @@ var minify          = require('gulp-minify-css');
 
 var source = {
     css: {
-        bundle: './styles/bundle.css'
+        bundle: './app/styles/bundle.css'
     },
     js: {
         view: {
-            chat: './app/views/chat.js',
-            sign: './app/views/sign.js'
+            chat: './app/view/chat.js',
+            sign: './app/view/sign.js'
         },
-        core: './app/clientCore.js',
         jquery: './bower_components/jquery/dist/jquery.js'
     }
 };
@@ -55,8 +54,7 @@ gulp.task('wcss', function () {
 // MAIN JS
 gulp.task('js', function () {
     gulp.src([
-        source.js.jquery,
-        source.js.core
+        source.js.jquery
     ])
         .pipe(concat("script.js"))
         .pipe(gulp.dest(destination.js))
@@ -68,10 +66,9 @@ gulp.task("wjs", function () {
     gulp.start([
         'js'
     ]);
-
-    gulp.watch([
-        source.js.core
-    ], ["js"]);
+    //gulp.watch([
+    //    source.js.core
+    //], ["js"]);
 });
 ///////////////////////////////////////////
 

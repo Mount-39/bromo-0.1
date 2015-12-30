@@ -1,7 +1,7 @@
 var chat = function () {
 
     var socket = io();
-
+    socket.user = {username: username, email: email};
     var Users = [];
 
     var username = window.localStorage.getItem('username');
@@ -72,12 +72,12 @@ var chat = function () {
         $('<button/>',
             {
                 text: 'Send',
-                     click: function () {
-                         var message = $('[id = message]').val();       //USERNAME???????
-                        socket.emit('message', {message: message, username: username});
-                         sendMessage(message, 'outbox');
-                         $('[id = message]').empty();
-                     }
+                click: function () {
+                    var message = $('[id = message]').val();
+                    socket.emit('message', {message: message, username: username});
+                    sendMessage(message, 'outbox');
+                    $('[id = message]').empty();
+                }
             }).appendTo(form);
 
         contentEl.append(form);
@@ -88,8 +88,11 @@ var chat = function () {
     $.ajax({
         type: "GET",
         url: "/api/users",
-        data: window.localStorage.getItem('access_token'),
+        headers: {
+            "x-access-token": window.localStorage.getItem('access_token')
+        },
         success: function (data) {
+            console.log(data);
             if (data.success == true) {
 
                 setAside(aside);            //Run the chat
@@ -97,7 +100,7 @@ var chat = function () {
 
                 Users = data.users;
 
-                socket.handshake.user = { username: username, email: email };       //??????????????????????
+                       //??????????????????????
             }
 
             else {
@@ -112,7 +115,7 @@ var chat = function () {
         }
     });
 
-    function sendMessage(message, sendType){
+    function sendMessage(message, sendType) {
         $('[id = chat]').append(
             $('<li/>', {
                 text: message,
@@ -121,17 +124,22 @@ var chat = function () {
         );
     }
 
-    socket.on('message', function(data){
+    socket.on('message', function (data) {
 
-       sendMessage(data.username+ ": " + data.message, 'inbox');
-                                //li class=inbox | outbox
+        sendMessage(data.username + ": " + data.message, 'inbox');
+        //li class=inbox | outbox
     });
 
-    socket.on('disconnect', function (data) {
+    //TODO
+    $.unload(function (e) {
+        socket.close();
+    });
+    //TODO
+    socket.on('clear', function () {
         window.localStorage.removeItem('access_token');
         window.localStorage.removeItem('email');
         window.localStorage.removeItem('username');
-        $.page.reload();
+        window.location.reload()
     });
 
 };

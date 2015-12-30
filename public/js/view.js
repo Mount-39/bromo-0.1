@@ -1,5 +1,3 @@
-// ./app/views/sign.js
-
 $(function() {
 
     var sign = function () {
@@ -45,7 +43,7 @@ $(function() {
             e.preventDefault();
             $.ajax({
                 type: "POST",
-                url: '/authorization',
+                url: '/api/authorization',
                 data: {
                     email: $('[type = email]').val(),
                     password: $('[type = password]').val()
@@ -53,7 +51,12 @@ $(function() {
                 success: function (data) {
                     $('[class = error]').remove();
 
-                    if (data == true) {
+                    if (data.success == true) {
+                        var token = data.token;
+                        window.localStorage.setItem('access_token', token);
+                        window.localStorage.setItem('email', data.user.email);
+                        window.localStorage.setItem('username', data.user.username);
+
                         body.empty();
                         chat();
                     }
@@ -108,7 +111,7 @@ $(function() {
                     class: "reg", click: function () {
                         $.ajax({
                             type: "POST",
-                            url: '/registration',
+                            url: '/api/registration',
                             data: {
                                 email: $('[type = email]').val(),
                                 password: $('[type = password]').val(),
@@ -117,27 +120,22 @@ $(function() {
                             success: function (data) {
                                 error.empty();
 
-                                console.log(data.result);
+                                if (data.success == true) {
+                                    var token = data.token;
+                                    window.localStorage.setItem('access_token', token);
+                                    window.localStorage.setItem('email', data.user.email);
+                                    window.localStorage.setItem('username', data.user.username);
 
-                                if (data.result == true) {
                                     body.empty();
                                     chat();
                                 }
 
-                                if(data.error.indexOf("E11000") >= 0){
-                                    $('<h5/>', {
-                                        text: "This username is already exists!"
-                                    }).appendTo(error);
-                                }
-
                                 else {
                                     $('<h5/>', {
-                                        text: data.error
+                                        text: data.message
                                     }).appendTo(error);
                                 }
 
-                                console.log(data);
-                                main();
                             }
                         });
                     }
@@ -169,31 +167,18 @@ $(function() {
     sign();
 
 });
-// ./app/views/chat.js
-
 var chat = function () {
+
+    var socket = io();
+    socket.user = {username: username, email: email};
+    var Users = [];
+
+    var username = window.localStorage.getItem('username');
+    var email = window.localStorage.getItem('email');
+
     var body = $('#page');
 
 //========================
-
-    /**
-     *
-     * @param {string} message
-     * @param {string} className
-     */
-    function addMessage(message, className) {
-        $('div#chat ul').append($('li').addClass(className).text(message));
-    }
-
-    /**
-     *
-     * @param {string} message
-     */
-    function sendMessage(message) {
-        socket.emit('message', message);
-        addMessage(message.val(), 'outbox');
-        message.val('');
-    }
 
     var aside = $('<aside/>', {
         id: 'sidebar'
@@ -256,7 +241,12 @@ var chat = function () {
         $('<button/>',
             {
                 text: 'Send',
-                click: function () { sendMessage($('#message')) }
+                click: function () {
+                    var message = $('[id = message]').val();
+                    socket.emit('message', {message: message, username: username});
+                    sendMessage(message, 'outbox');
+                    $('[id = message]').empty();
+                }
             }).appendTo(form);
 
         contentEl.append(form);
@@ -264,10 +254,61 @@ var chat = function () {
         return this;
     }
 
-    setAside(aside);
-    setContent(content);
+    $.ajax({
+        type: "GET",
+        url: "/api/users",
+        headers: {
+            "x-access-token": window.localStorage.getItem('access_token')
+        },
+        success: function (data) {
+            console.log(data);
+            if (data.success == true) {
 
-    socket.on('message', function (message) {
-        addMessage(message, 'inbox');
-    })
+                setAside(aside);            //Run the chat
+                setContent(content);
+
+                Users = data.users;
+
+                       //??????????????????????
+            }
+
+            else {
+                content.append($('<div/>', {
+                    class: 'error',
+                    text: "Login first, stranger!"
+                }));
+
+                body.empty();
+                sign();
+            }
+        }
+    });
+
+    function sendMessage(message, sendType) {
+        $('[id = chat]').append(
+            $('<li/>', {
+                text: message,
+                class: sendType
+            })
+        );
+    }
+
+    socket.on('message', function (data) {
+
+        sendMessage(data.username + ": " + data.message, 'inbox');
+        //li class=inbox | outbox
+    });
+
+    //TODO
+    $.unload(function (e) {
+        socket.close();
+    });
+    //TODO
+    socket.on('clear', function () {
+        window.localStorage.removeItem('access_token');
+        window.localStorage.removeItem('email');
+        window.localStorage.removeItem('username');
+        window.location.reload()
+    });
+
 };

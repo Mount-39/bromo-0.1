@@ -1,13 +1,18 @@
-module.exports = function (socket) {
+module.exports = function (io) {
 
-    console.log('user connected');
+    return function (socket) {
 
-    socket.on('disconnect', function (user) {
-        console.log('user ' + user.username + ' disconnected');
-    });
+        console.log('user connected');
 
-    socket.on('message', function (data) {
-        socket.broadcast.emit('message', data);
-    })
+        //TODO
+        socket.on('disconnect', function (user) {
+            socket.emit('clear');
+        });
+
+        socket.on('message', function (data) {
+            socket.broadcast.emit('message', data);
+        })
+
+    };
 
 };

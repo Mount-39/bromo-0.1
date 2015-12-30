@@ -39,7 +39,7 @@ app.use('/api', require('./app/routes').api(app));
 
 // SOCKET.IO
 var io              = require('socket.io')(http);
-io.on('connect', require('./app/socket'));
+io.on('connect', require('./app/socket')(io));
 ///////////////////////////////////////////
 
 // START UP SERVER

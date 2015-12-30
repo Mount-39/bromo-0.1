@@ -51,9 +51,11 @@ $(function() {
                 success: function (data) {
                     $('[class = error]').remove();
 
-                    if (data == true) {
+                    if (data.success == true) {
                         var token = data.token;
                         window.localStorage.setItem('access_token', token);
+                        window.localStorage.setItem('email', data.user.email);
+                        window.localStorage.setItem('username', data.user.username);
 
                         body.empty();
                         chat();
@@ -118,13 +120,11 @@ $(function() {
                             success: function (data) {
                                 error.empty();
 
-                                console.log(data.result);
-
                                 if (data.success == true) {
                                     var token = data.token;
                                     window.localStorage.setItem('access_token', token);
-                                    window.localStorage.setItem('email', $('[type = email]').val());
-                                    window.localStorage.setItem('username', $('[type = text]').val());
+                                    window.localStorage.setItem('email', data.user.email);
+                                    window.localStorage.setItem('username', data.user.username);
 
                                     body.empty();
                                     chat();
