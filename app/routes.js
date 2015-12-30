@@ -51,7 +51,11 @@ module.exports.api = function (app) {
                 res.json({
                     success: true,
                     message: 'token is ready',
-                    token: token
+                    token: token,
+                    user: {
+                        username: user.username,
+                        email: user.email
+                    }
                 });
             }
         });
@@ -64,14 +68,21 @@ module.exports.api = function (app) {
         });
         user.save(function (err) {
             if (err) {
-                throw err;
+                res.json({
+                    success: false,
+                    message: err.message
+                });
             } else {
                 var token = createToken(user);
                 addUser(user);
                 res.json({
                     success: true,
                     message: 'user added, token is ready',
-                    token: token
+                    token: token,
+                    user: {
+                        username: user.username,
+                        email: user.email
+                    }
                 });
             }
         })
@@ -100,8 +111,14 @@ module.exports.api = function (app) {
             res.json({
                 success: true,
                 users: app.usersOnline
-            })
+            });
+        } else {
+            res.json({
+                success: false,
+                message: 'there is no token attached'
+            });
         }
+
     });
 
     return router;
