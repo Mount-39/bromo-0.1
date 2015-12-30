@@ -7,32 +7,47 @@ module.exports.api = function (app) {
 
     var router = createRouter();
 
+    app.usersOnline = [];
+
     function createToken(user) {
         return jwt.sign({
             username: user.username,
             email: user.email
-        } , secret, {
+        }, secret, {
             expiresIn: 10 * 60
         });
     }
 
-    router.post('authorization', function (req, res) {
-        User.findOne({username: req.body.username}, function (err, user) {
-            if(err) {
+    function addUser(user) {
+        for(var i in app.usersOnline){
+            if(user.email == app.usersOnline[i].email){
+                return false;
+            }
+        }
+        app.usersOnline.push({
+            username: user.username,
+            email: user.email
+        });
+    }
+
+    router.post('/authorization', function (req, res) {
+        User.findOne({email: req.body.email}, function (err, user) {
+            if (err) {
                 throw err;
             }
-            if(!user) {
+            if (!user) {
                 res.json({
                     success: false,
                     message: 'user error'
                 })
-            } else if (user.password != req.body.password){
+            } else if (user.password != req.body.password) {
                 res.json({
                     success: false,
                     message: 'pass error'
                 })
             } else {
                 var token = createToken(user);
+                addUser(user);
                 res.json({
                     success: true,
                     message: 'token is ready',
@@ -41,17 +56,18 @@ module.exports.api = function (app) {
             }
         });
     });
-    router.post('registration', function (req, res) {
+    router.post('/registration', function (req, res) {
         var user = User({
             username: req.body.username,
             password: req.body.password,
             email: req.body.email
         });
         user.save(function (err) {
-            if(err){
+            if (err) {
                 throw err;
             } else {
                 var token = createToken(user);
+                addUser(user);
                 res.json({
                     success: true,
                     message: 'user added, token is ready',
@@ -61,11 +77,31 @@ module.exports.api = function (app) {
         })
     });
 
-    router.post('/users', function (req, res) {
+    function verifyToken(req, res, next) {
+        var token = req.body.token || req.headers['x-access-token'];
+        if(!token){
+            res.json({
+                success: false,
+                message: 'there is no token attached'
+            });
+        } else {
+            jwt.verify(token, secret, function (err, decoded) {
+                if(err) {
+                    throw err;
+                }
+                req.decoded = decoded;
+                next();
+            });
+        }
+    }
 
-    });
-    router.get('/users', function (req, res) {
-
+    router.get('/users', verifyToken, function (req, res) {
+        if(req.decoded){
+            res.json({
+                success: true,
+                users: app.usersOnline
+            })
+        }
     });
 
     return router;

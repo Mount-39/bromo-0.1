@@ -16,22 +16,25 @@ var config          = require('./app/config');
 
 // SETTING UP MONGO
 var mongoose        = require('mongoose');
-mongoose.connect(config.mongo.local);
+mongoose.connect(config.mongo.url);
 ///////////////////////////////////////////
 
 // SETTING UP APP
 var session = expressSession({
     secret: config.secret,
+    resave: false,
+    saveUninitialized: true,
     store: new mongoStore({
         mongooseConnection: mongoose.connection
     })
 });
-app.use(parser());
+app.use(parser.urlencoded({ extended: false }));
+app.use(parser.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session);
 app.use(express.static(__dirname + '/public'));
-app.use('/api', require('./app/routes').api());
+app.use('/api', require('./app/routes').api(app));
 ///////////////////////////////////////////
 
 // SOCKET.IO
