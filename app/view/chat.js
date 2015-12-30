@@ -4,7 +4,8 @@ var chat = function () {
 
     var Users = [];
 
-    var username = '';
+    var username = window.localStorage.getItem('username');
+    var email = window.localStorage.getItem('email');
 
     var body = $('#page');
 
@@ -73,7 +74,9 @@ var chat = function () {
                 text: 'Send',
                      click: function () {
                          var message = $('[id = message]').val();       //USERNAME???????
-                        socket.emit('message', {message: message, username: username})
+                        socket.emit('message', {message: message, username: username});
+                         sendMessage(message, 'outbox');
+                         $('[id = message]').empty();
                      }
             }).appendTo(form);
 
@@ -87,14 +90,14 @@ var chat = function () {
         url: "/api/users",
         data: window.localStorage.getItem('access_token'),
         success: function (data) {
-            if (data == true) {
+            if (data.success == true) {
 
                 setAside(aside);            //Run the chat
                 setContent(content);
 
                 Users = data.users;
 
-                socket.handshake.user = data;       //??????????????????????
+                socket.handshake.user = { username: username, email: email };       //??????????????????????
             }
 
             else {
@@ -102,14 +105,33 @@ var chat = function () {
                     class: 'error',
                     text: "Login first, stranger!"
                 }));
+
+                body.empty();
+                sign();
             }
         }
     });
 
+    function sendMessage(message, sendType){
+        $('[id = chat]').append(
+            $('<li/>', {
+                text: message,
+                class: sendType
+            })
+        );
+    }
 
     socket.on('message', function(data){
 
-        $('[id = chat]').append(data.username+ ": " + data.message);
+       sendMessage(data.username+ ": " + data.message, 'inbox');
+                                //li class=inbox | outbox
+    });
+
+    socket.on('disconnect', function (data) {
+        window.localStorage.removeItem('access_token');
+        window.localStorage.removeItem('email');
+        window.localStorage.removeItem('username');
+        $.page.reload();
     });
 
 };

@@ -120,27 +120,22 @@ $(function() {
 
                                 console.log(data.result);
 
-                                if (data.result == true) {
+                                if (data.success == true) {
                                     var token = data.token;
                                     window.localStorage.setItem('access_token', token);
+                                    window.localStorage.setItem('email', $('[type = email]').val());
+                                    window.localStorage.setItem('username', $('[type = text]').val());
+
                                     body.empty();
                                     chat();
                                 }
 
-                                if(data.error.indexOf("E11000") >= 0){
-                                    $('<h5/>', {
-                                        text: "That username is already exist!"
-                                    }).appendTo(error);
-                                }
-
                                 else {
                                     $('<h5/>', {
-                                        text: data.error
+                                        text: data.message
                                     }).appendTo(error);
                                 }
 
-                                console.log(data);
-                                main();
                             }
                         });
                     }
