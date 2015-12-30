@@ -74,9 +74,10 @@ var chat = function () {
                 text: 'Send',
                 click: function () {
                     var message = $('[id = message]').val();
+                    if(!message) return;
                     socket.emit('message', {message: message, username: username});
                     sendMessage(message, 'outbox');
-                    $('[id = message]').empty();
+                    $('[id = message]').val("");
                 }
             }).appendTo(form);
 
@@ -100,7 +101,7 @@ var chat = function () {
 
                 Users = data.users;
 
-                       //??????????????????????
+
             }
 
             else {
@@ -125,8 +126,8 @@ var chat = function () {
     }
 
     socket.on('message', function (data) {
-
-        sendMessage(data.username + ": " + data.message, 'inbox');
+        var tell = data.username + ": " + data.message
+        sendMessage(tell, 'inbox');
         //li class=inbox | outbox
     });
 
