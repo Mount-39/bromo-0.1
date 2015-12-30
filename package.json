@@ -2,7 +2,7 @@
   "name": "bromo",
   "version": "0.0.1",
   "description": "bromo chat",
-  "main": "run.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
