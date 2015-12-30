@@ -13,7 +13,7 @@
       "silent" : true,
       "disable_colors": false,
       "desiredCapabilities" : {
-        "browserName" : "chrome",
+        "browserName" : "firefox",
         "javascriptEnabled" : true,
         "acceptSslCerts" : true
       }

@@ -1,3 +1,3 @@
 module.exports ={
-   HOST: "http://cbo.api.develop"
+   HOST: "http://localhost:8080/"
 };
