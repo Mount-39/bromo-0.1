@@ -108,10 +108,14 @@ module.exports.api = function (app) {
         } else {
             jwt.verify(token, secret, function (err, decoded) {
                 if (err) {
-                    throw err;
+                    res.json({
+                        success: false,
+                        message: 'token expired'
+                    })
+                } else {
+                    req.decoded = decoded;
+                    next();
                 }
-                req.decoded = decoded;
-                next();
             });
         }
     }

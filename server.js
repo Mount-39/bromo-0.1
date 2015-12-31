@@ -16,7 +16,7 @@ var config          = require('./app/config');
 
 // SETTING UP MONGO
 var mongoose        = require('mongoose');
-mongoose.connect(config.mongo.url);
+mongoose.connect(config.mongo.local);
 ///////////////////////////////////////////
 
 // SETTING UP APP
