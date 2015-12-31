@@ -110,7 +110,7 @@ module.exports.api = function (app) {
                 if (err) {
                     res.json({
                         success: false,
-                        message: 'token expired'
+                        message: 'token expired or you are cheater'
                     })
                 } else {
                     req.decoded = decoded;
